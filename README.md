@@ -14,7 +14,7 @@
 * Explosion effects and sound
 * Game loop with win/lose conditions
 
-<hr>
+---
 
 ### ✅ Workflow & Milestones Checklist
 
@@ -47,7 +47,7 @@
 - [ ] Optimize performance
 - [ ] Final playtesting and balancing
 
-<hr>
+---
 
 ### 📚 References
 
