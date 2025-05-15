@@ -4,11 +4,7 @@
 
 **Tech Stack:** Python, OpenGL
 
-### ✅ TODO
-
-* Create workflows, milestones for mvps
-
-### ✨ Features
+**Features:**
 
 * First-person view with retro-style wireframe graphics
 * Tank movement & shooting mechanics
@@ -17,6 +13,41 @@
 * HUD with radar, lives, and score
 * Explosion effects and sound
 * Game loop with win/lose conditions
+
+<hr>
+
+### ✅ Workflow & Milestones Checklist
+
+#### MVP 1: Basic Framework & Movement
+- [ ] Set up Python and OpenGL development environment
+- [ ] Create window and rendering context
+- [ ] Implement first-person camera controls (look & move)
+- [ ] Render simple wireframe objects (e.g., tank model placeholder)
+- [ ] Basic tank movement mechanics (forward, backward, turn)
+
+#### MVP 2: Shooting & Enemy AI Basics
+- [ ] Implement shooting mechanics (projectiles firing)
+- [ ] Create simple enemy models (wireframe)
+- [ ] Basic enemy AI: chase player
+- [ ] Collision detection for projectiles and enemies
+
+#### MVP 3: Procedural Terrain & HUD
+- [ ] Generate procedural terrain (wireframe landscape)
+- [ ] Add HUD elements: radar, lives, score display
+- [ ] Integrate game loop with win/lose conditions
+
+#### MVP 4: Effects & Sound
+- [ ] Explosion effects (visual wireframe explosion)
+- [ ] Add sound effects for shooting and explosions
+- [ ] Refine enemy AI: shooting back at player
+
+#### MVP 5: Polishing & Finalizing
+- [ ] Improve graphics (better wireframe, colors)
+- [ ] Debug gameplay mechanics and fix bugs
+- [ ] Optimize performance
+- [ ] Final playtesting and balancing
+
+<hr>
 
 ### 📚 References
 
