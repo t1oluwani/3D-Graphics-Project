@@ -15,5 +15,7 @@ class Enemy:
         self.x -= math.sin(self.angle) * speed
         self.z -= math.cos(self.angle) * speed
 
-    def rotate(self, amount):
-        self.angle += amount
+        
+    def attack_player(self):
+        # todo
+        pass
