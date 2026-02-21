@@ -5,22 +5,25 @@ class Player:
         self.x = 0.0
         self.y = 0.0
         self.z = -5.0
-        self.angle = 0.0
+        self.angle = 0.0  # degrees
 
     def move_forward(self, speed):
-        self.x += math.sin(self.angle) * speed
-        self.z += math.cos(self.angle) * speed
+        radians = math.radians(self.angle)
+        self.x -= math.sin(radians) * speed
+        self.z += math.cos(radians) * speed
 
     def move_backward(self, speed):
-        self.x -= math.sin(self.angle) * speed
-        self.z -= math.cos(self.angle) * speed
-    
+        radians = math.radians(self.angle)
+        self.x += math.sin(radians) * speed
+        self.z -= math.cos(radians) * speed
+
     def rotate_right(self, amount):
         self.angle += amount
-        
+        self.angle %= 360
+
     def rotate_left(self, amount):
         self.angle -= amount
+        self.angle %= 360
 
     def shoot(self):
-        # todo
         pass
