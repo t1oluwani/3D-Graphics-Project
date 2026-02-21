@@ -71,14 +71,16 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
             if (event.type==pg.QUIT) or (event.type==pg.KEYDOWN and event.key==pg.K_ESCAPE):
                 running = False
                 
-            if (event.type==pg.KEYDOWN and (event.key==pg.K_UP or event.key==pg.K_w)):
-                player.move_forward(1)
-            if (event.type==pg.KEYDOWN and (event.key==pg.K_DOWN or event.key==pg.K_s)):
-                player.move_backward(1)
-            if (event.type==pg.KEYDOWN and (event.key==pg.K_LEFT or event.key==pg.K_a)):
-                player.rotate_left(0.5)
-            if (event.type==pg.KEYDOWN and (event.key==pg.K_RIGHT or event.key==pg.K_d)):
-                player.rotate_right(0.5)
+            keys = pg.key.get_pressed()
+                
+            if keys[pg.K_UP] or keys[pg.K_w]:
+                player.move_forward(0.1)
+            if keys[pg.K_DOWN] or keys[pg.K_s]:
+                player.move_backward(0.1)
+            if keys[pg.K_LEFT] or keys[pg.K_a]:
+                player.rotate_left(5)
+            if keys[pg.K_RIGHT] or keys[pg.K_d]:
+                player.rotate_right(5)
                             
                 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
