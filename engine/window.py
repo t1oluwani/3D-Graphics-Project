@@ -81,6 +81,8 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
                 player.rotate_left(5)
             if keys[pg.K_RIGHT] or keys[pg.K_d]:
                 player.rotate_right(5)
+            if keys[pg.K_SPACE]:
+                player.shoot()
                             
                 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)

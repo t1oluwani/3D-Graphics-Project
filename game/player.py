@@ -1,5 +1,9 @@
 import math
 
+def player_shoot(x, y, z, angle):
+    print(f"Player shoots from position ({x}, {y}, {z}) at angle {angle}")
+    #todo
+
 class Player:
     def __init__(self):
         self.x = 0.0
@@ -26,4 +30,4 @@ class Player:
         self.angle %= 360
 
     def shoot(self):
-        pass
+        player_shoot(self.x, self.y, self.z, self.angle)
