@@ -1,5 +1,13 @@
 import math
 
+def draw_player(x, y, z, angle):
+    print(f"Drawing player at position ({x}, {y}, {z}) with angle {angle}")
+    #todo
+    
+def draw_bullet(x, y, z):
+    print(f"Drawing bullet at position ({x}, {y}, {z})")
+    #todo
+
 def player_shoot(x, y, z, angle):
     print(f"Player shoots from position ({x}, {y}, {z}) at angle {angle}")
     #todo

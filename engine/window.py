@@ -48,6 +48,46 @@ def drawcube():
         glVertex3fv(end_point)
     
     glEnd()
+    
+def draw_scope(width, height):
+    # Switch to 2D mode
+    glMatrixMode(GL_PROJECTION)
+    glPushMatrix()
+    glLoadIdentity()
+    glOrtho(0, width, height, 0, -1, 1)
+
+    glMatrixMode(GL_MODELVIEW)
+    glPushMatrix()
+    glLoadIdentity()
+
+    glDisable(GL_DEPTH_TEST)
+
+    glColor3f(0.0, 1.0, 0.0)
+    glLineWidth(2.0)
+
+    cx = width // 2
+    cy = height // 2
+    size = 50
+
+    glBegin(GL_LINES)
+
+    # Horizontal
+    glVertex2f(cx - size, cy)
+    glVertex2f(cx + size, cy)
+
+    # Vertical
+    glVertex2f(cx, cy - size)
+    glVertex2f(cx, cy + size)
+
+    glEnd()
+
+    glEnable(GL_DEPTH_TEST)
+
+    # Restore 3D mode
+    glPopMatrix()
+    glMatrixMode(GL_PROJECTION)
+    glPopMatrix()
+    glMatrixMode(GL_MODELVIEW)
 
 def init_gl_state(width, height):    
     # setup camera
@@ -94,8 +134,12 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
         glRotatef(player.angle, 0, 1, 0)
         glTranslatef(player.x, player.y, player.z)
         
+        # Draw the scope in 2D
+        width, height = pg.display.get_surface().get_size()
+        draw_scope(width, height)
+        
         drawcube()
-
+        
         pg.display.flip()
         pg.time.wait(10)
     pg.quit()
