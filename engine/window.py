@@ -88,6 +88,12 @@ def draw_scope(width, height):
     glMatrixMode(GL_PROJECTION)
     glPopMatrix()
     glMatrixMode(GL_MODELVIEW)
+    
+def draw_turret(x, y, z):
+    #todo
+    pass
+    
+    
 
 def init_gl_state(width, height):    
     # setup camera
