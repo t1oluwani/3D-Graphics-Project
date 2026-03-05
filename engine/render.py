@@ -115,19 +115,18 @@ def draw_horizon(player_angle):
     # glPopMatrix()
     
 def draw_floor(size):
-    print(f"Drawing floor with size {size}")
-    
-    glColor3f(0.0, 0.5, 0.0) # Dark green for floor
+    glColor3f(0.0, 0.1, 0.0)
+    glLineWidth(1.0)
     glBegin(GL_QUADS)
-    glVertex3f(-size, 0, -size)
-    glVertex3f(size, 0, -size)
-    glVertex3f(size, 0, size)
-    glVertex3f(-size, 0, size)
+    
+    glVertex3f(-size, -1, -size)
+    glVertex3f(size, -1, -size)
+    glVertex3f(size, -1, size)
+    glVertex3f(-size, -1, size)
     glEnd()
 
 def draw_world(world):
     draw_horizon(world.ref_angle)
-
     draw_floor(world.size)
 
     # for obj in world.objects:
