@@ -52,7 +52,7 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
         glLoadIdentity()
 
         # Apply player position and angle
-        glRotatef(-player.angle, 0, 1, 0)
+        glRotatef(-player.angle, 0, -1, 0)
         glTranslatef(-player.x, -player.y, -player.z)
         
         # Draw the world

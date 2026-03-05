@@ -18,11 +18,11 @@ class Player:
         self.z += math.cos(radians) * speed
 
     def rotate_right(self, amount):
-        self.angle -= amount
+        self.angle += amount
         self.angle %= 360
 
     def rotate_left(self, amount):
-        self.angle += amount
+        self.angle -= amount
         self.angle %= 360
 
     def shoot(self):
