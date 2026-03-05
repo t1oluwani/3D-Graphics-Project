@@ -2,9 +2,10 @@ import pygame as pg
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from game.player import Player
+from classes.player import Player
+from classes.world import World
 from engine.temp_file import draw_reference_cube
-from engine.render import draw_scope
+from engine.render import draw_scope, draw_world
 
 def init_gl_state(width, height):    
     # setup camera
@@ -18,10 +19,11 @@ def init_gl_state(width, height):
     
 def create_window(width=1024, height=768, title="Atari Battlezone Window"):
     pg.init() # init pygame 
-    window = pg.display.set_mode((width, height), pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE)
+    pg.display.set_mode((width, height), pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE)
     init_gl_state(width, height) # setup opengl state
     
-    player = Player()   
+    player = Player()  
+    world = World(player) 
     running = True
     
     while running:
@@ -30,7 +32,7 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
             if (event.type==pg.QUIT) or (event.type==pg.KEYDOWN and event.key==pg.K_ESCAPE):
                 running = False
                 
-            keys = pg.key.get_pressed() # Ensures holding down keys works
+            keys = pg.key.get_pressed() # ensures holding down keys works
                 
             if keys[pg.K_w]:
                 player.move_forward(0.1)
@@ -50,8 +52,11 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
         glLoadIdentity()
 
         # Apply player position and angle
-        glRotatef(player.angle, 0, 1, 0)
-        glTranslatef(player.x, player.y, player.z)
+        glRotatef(-player.angle, 0, 1, 0)
+        glTranslatef(-player.x, -player.y, -player.z)
+        
+        # Draw the world
+        draw_world(world)
         
         # Cube for movement reference
         draw_reference_cube()
