@@ -32,13 +32,13 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
                 
             keys = pg.key.get_pressed()
                 
-            if keys[pg.K_UP] or keys[pg.K_w]:
+            if keys[pg.K_w]:
                 player.move_forward(0.1)
-            if keys[pg.K_DOWN] or keys[pg.K_s]:
+            if keys[pg.K_s]:
                 player.move_backward(0.1)
-            if keys[pg.K_LEFT] or keys[pg.K_a]:
+            if keys[pg.K_a]:
                 player.rotate_left(5)
-            if keys[pg.K_RIGHT] or keys[pg.K_d]:
+            if keys[pg.K_d]:
                 player.rotate_right(5)
             if keys[pg.K_SPACE]:
                 player.shoot()
