@@ -3,6 +3,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 
 # HELPER FUNCTIONS
+
 def begin_2d(width, height):
     # Switch to projection matrix
     glMatrixMode(GL_PROJECTION)
@@ -10,7 +11,7 @@ def begin_2d(width, height):
     glLoadIdentity()
     
     glOrtho(0, width, height, 0, -1, 1)
-    glLineWidth(4.0)
+    glLineWidth(2.0)
 
     # Switch to modelview
     glMatrixMode(GL_MODELVIEW)
@@ -29,7 +30,10 @@ def end_2d():
     glMatrixMode(GL_PROJECTION)
     glPopMatrix()
     glMatrixMode(GL_MODELVIEW)
-    
+   
+   
+   
+# RENDERING FUNCTIONS    
     
 def draw_scope(width, height):
     # Switch to 2D mode
@@ -37,32 +41,51 @@ def draw_scope(width, height):
 
     cx = width // 2
     cy = height // 2
-    size = 50
+    bracket_width = 125   
+    bracket_height = 25  
+    vertical_gap = 60
+    vertical_line = 100
+
+    glColor3f(0.0, 1.0, 0.0) 
+    glLineWidth(2.0)
 
     glBegin(GL_LINES)
-    glColor3f(1.0, 0.0, 0.0)
+    
+    # --- Top Bracket ---
+    # Vertical line
+    glVertex2f(cx, cy + vertical_gap)
+    glVertex2f(cx, cy + vertical_gap + vertical_line)
+    # Horizontal bar
+    glVertex2f(cx - bracket_width // 2, cy + vertical_gap)
+    glVertex2f(cx + bracket_width // 2, cy + vertical_gap)
+    # Left vertical arm
+    glVertex2f(cx - bracket_width // 2, cy - vertical_gap)
+    glVertex2f(cx - bracket_width // 2, cy - vertical_gap + bracket_height)
+    # Right vertical arm
+    glVertex2f(cx + bracket_width // 2, cy - vertical_gap)
+    glVertex2f(cx + bracket_width // 2, cy - vertical_gap + bracket_height)
 
-    # Horizontal
-    glVertex2f(cx - size, cy)
-    glVertex2f(cx + size, cy)
-
-    # Vertical
-    glVertex2f(cx, cy - size)
-    glVertex2f(cx, cy + size)
+    # --- Bottom Bracket ---
+    # Vertical line
+    glVertex2f(cx, cy - vertical_gap)
+    glVertex2f(cx, cy - vertical_gap - vertical_line)
+    # Horizontal bar
+    glVertex2f(cx - bracket_width // 2, cy - vertical_gap)
+    glVertex2f(cx + bracket_width // 2, cy - vertical_gap)
+    # Left vertical arm
+    glVertex2f(cx - bracket_width // 2, cy + vertical_gap)
+    glVertex2f(cx - bracket_width // 2, cy + vertical_gap - bracket_height)
+    # Right vertical arm
+    glVertex2f(cx + bracket_width // 2, cy + vertical_gap)
+    glVertex2f(cx + bracket_width // 2, cy + vertical_gap - bracket_height)
 
     glEnd()
 
     # Switch back to 3D mode
     end_2d()
+
     
 
-def draw_turret(x, y, z):
-    #todo
-    pass
-    
-def draw_player(x, y, z, angle):
-    print(f"Drawing player at position ({x}, {y}, {z}) with angle {angle}")
-    #todo
     
 def draw_bullet(x, y, z):
     print(f"Drawing bullet at position ({x}, {y}, {z})")
