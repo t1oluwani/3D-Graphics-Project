@@ -4,7 +4,6 @@ from OpenGL.GLU import *
 
 from classes.player import Player
 from classes.world import World
-from engine.temp_file import draw_reference_cube
 from engine.render import draw_scope, draw_world
 
 def init_gl_state(width, height):    
