@@ -2,8 +2,8 @@ import pygame as pg
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from classes.player import Player
-from classes.world import World
+from game.player import Player
+from game.world import World
 from engine.render import draw_scope, draw_world
 
 def init_gl_state(width, height):    

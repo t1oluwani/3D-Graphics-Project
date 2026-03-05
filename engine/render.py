@@ -6,7 +6,6 @@ MOUNTAIN_POINTS = 4 * [20, 50, 30, 80, 40, 20, 60, 90, 40, 30, 70, 40]
 
 # HELPER FUNCTIONS
 
-
 def begin_2d(width, height):
     # Switch to projection matrix
     glMatrixMode(GL_PROJECTION)
