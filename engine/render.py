@@ -2,7 +2,7 @@ import math
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-MOUNTAIN_POINTS = [20, 50, 30, 80, 40, 20, 60, 90, 40, 30, 70, 40]
+MOUNTAIN_POINTS = 4*[20, 50, 30, 80, 40, 20, 60, 90, 40, 30, 70, 40]
 
 # HELPER FUNCTIONS
 
@@ -86,33 +86,29 @@ def draw_scope(width, height):
     end_2d()
     
     
-def draw_horizon(player_angle):
-    pass
-    # print(f"Drawing horizon with player angle {player_angle}")
-    # glPushMatrix()
-    
-    # # Rotate the mountains based on player looking around
-    # glRotatef(-player_angle, 0, 1, 0)
-    
-    # glColor3f(0.0, 0.8, 0.0) # Slightly darker green for distance
-    # glLineWidth(1.5)
-    
-    # glBegin(GL_LINE_LOOP)
-    # num_points = len(MOUNTAIN_POINTS)
-    # radius = 500
-    
-    # for i in range(num_points):
-    #     angle_deg = i * (360 / num_points)
-    #     angle_rad = math.radians(angle_deg)
+def draw_mountains(player_angle):
+    glPushMatrix()
+
+    glRotatef(-player_angle, 0, 1, 0)
+    glColor3f(0.0, 0.8, 0.0)
+    glLineWidth(2)
+
+    radius = 40
+    height_scale = 0.1
+    num_points = len(MOUNTAIN_POINTS)
+
+    glBegin(GL_LINE_LOOP)
+
+    for i in range(num_points):
+        angle = math.radians(i * (360 / num_points))
+        x = radius * math.cos(angle)
+        z = radius * math.sin(angle)
+        y = MOUNTAIN_POINTS[i] * height_scale
         
-    #     x = radius * math.cos(angle_rad)
-    #     z = radius * math.sin(angle_rad)
-    #     y = MOUNTAIN_POINTS[i]
+        glVertex3f(x, y, z)
         
-    #     glVertex3f(x, y, z)
-        
-    # glEnd()
-    # glPopMatrix()
+    glEnd()
+    glPopMatrix()
     
 def draw_floor(size):
     glColor3f(0.0, 0.1, 0.0)
@@ -120,23 +116,40 @@ def draw_floor(size):
     glBegin(GL_QUADS)
     
     glVertex3f(-size, -1, -size)
-    glVertex3f(size, -1, -size)
-    glVertex3f(size, -1, size)
-    glVertex3f(-size, -1, size)
+    glVertex3f( size, -1, -size)
+    glVertex3f( size, -1,  size)
+    glVertex3f(-size, -1,  size)
+    glEnd()
+    
+def draw_pyramid(x, z):    
+    glColor3f(1.0, 1.0, 1.0)
+    glLineWidth(1.5)
+    glBegin(GL_LINE_LOOP)
+    
+    glVertex3f(x - 1, -1, z - 1)
+    glVertex3f(x + 1, -1, z - 1)
+    glVertex3f(x + 1, -1, z + 1)
+    glVertex3f(x - 1, -1, z + 1)
+    
+    glEnd()
+    
+    glBegin(GL_LINES)
+    for dx, dz in [(-1,-1), (1,-1), (1,1), (-1,1)]:
+        glVertex3f(x + dx, -1, z + dz)
+        glVertex3f(x, 1.5, z)
     glEnd()
 
 def draw_world(world):
-    draw_horizon(world.ref_angle)
     draw_floor(world.size)
+    draw_mountains(world.ref_angle)
 
-    # for obj in world.objects:
-    #     x, z = obj['pos']
-    #     if obj['type'] == 'pyramid':
-    #         # draw_pyramid(x, z)
-    #         pass
-    #     else:
-    #         # draw_block(x, z)
-    #         pass
+    for obj in world.objects:
+        x, z = obj['pos']
+        if obj['type'] == 'pyramid':
+            draw_pyramid(x, z)
+        else:
+            # draw_block(x, z)
+            pass
 
     
 def draw_bullet(x, y, z):

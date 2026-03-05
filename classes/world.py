@@ -1,7 +1,6 @@
+import random
 from OpenGL.GL import *
 from OpenGL.GLU import *
-
-import random
 
 class World:
     def __init__(self, player, size=2000):
@@ -18,9 +17,9 @@ class World:
 
     def get_random_pos(self):
         while True:
-            x = random.randint(-self.size, self.size)
-            z = random.randint(-self.size, self.size)
-            if abs(x) > 100 or abs(z) > 100:
+            x = random.randint(-50, 50)
+            z = random.randint(-50, 50)
+            if abs(x) > 1 or abs(z) > 1:
                 return (x, z)
 
 

@@ -58,9 +58,6 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
         # Draw the world
         draw_world(world)
         
-        # Cube for movement reference
-        draw_reference_cube()
-        
         # Draw the scope in 2D
         width, height = pg.display.get_surface().get_size()
         draw_scope(width, height)
