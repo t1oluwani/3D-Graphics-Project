@@ -1,3 +1,4 @@
 from engine.window import create_window
 
-create_window()
+if __name__ == "__main__":
+    create_window()

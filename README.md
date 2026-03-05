@@ -10,8 +10,7 @@
 * Tank movement & shooting mechanics
 * Procedural terrain generation
 * Multiple enemies with simple AI (chase/fire)
-* HUD with radar, lives, and score
-* Explosion effects and sound
+* HUD with lives, and score
 * Game loop with win/lose conditions
 
 ---
@@ -27,25 +26,17 @@
 
 #### MVP 2: Shooting & Enemy AI Basics
 - [ ] Implement shooting mechanics (projectiles firing)
+- [ ] Render projectile objects in the world
 - [ ] Create simple enemy models (wireframe)
-- [ ] Basic enemy AI: chase player
+- [ ] Implement basic enemy movement (simple chase or patrol)
 - [ ] Collision detection for projectiles and enemies
 
-#### MVP 3: Procedural Terrain & HUD
-- [ ] Generate procedural terrain (wireframe landscape)
-- [ ] Add HUD elements: radar, lives, score display
-- [ ] Integrate game loop with win/lose conditions
-
-#### MVP 4: Effects & Sound
-- [ ] Explosion effects (visual wireframe explosion)
-- [ ] Add sound effects for shooting and explosions
-- [ ] Refine enemy AI: shooting back at player
-
-#### MVP 5: Polishing & Finalizing
-- [ ] Improve graphics (better wireframe, colors)
-- [ ] Debug gameplay mechanics and fix bugs
-- [ ] Optimize performance
-- [ ] Final playtesting and balancing
+#### MVP 3: Game, Effects & Sound
+- [ ] Add HUD elements (score display, lives counter, etc.)  
+- [ ] Implement win/lose conditions  
+- [ ] Add game state system (menu, playing, game over) 
+- [ ] Improve enemy behavior (AI shoots player)
+- [ ] Finishing touches + UPD readme with pictures
 
 ---
 
