@@ -30,7 +30,7 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
             if (event.type==pg.QUIT) or (event.type==pg.KEYDOWN and event.key==pg.K_ESCAPE):
                 running = False
                 
-            keys = pg.key.get_pressed()
+            keys = pg.key.get_pressed() # Ensures holding down keys works
                 
             if keys[pg.K_w]:
                 player.move_forward(0.1)
@@ -45,7 +45,7 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
                             
                 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-        
+         
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
 
