@@ -19,11 +19,11 @@
 ### ✅ Workflow & Milestones Checklist
 
 #### MVP 1: Basic Framework & Movement
-- [v] Set up Python and OpenGL development environment
-- [v] Create window and rendering context
-- [v] Implement first-person camera controls (look & move)
-- [v] Render simple wireframe objects (e.g., tank model placeholder)
-- [v] Basic tank movement mechanics (forward, backward, turn)
+- [x] Set up Python and OpenGL development environment
+- [x] Create window and rendering context
+- [x] Implement first-person camera controls (look & move)
+- [x] Render simple wireframe objects (e.g., tank model placeholder)
+- [x] Basic tank movement mechanics (forward, backward, turn)
 
 #### MVP 2: Shooting & Enemy AI Basics
 - [ ] Implement shooting mechanics (projectiles firing)
