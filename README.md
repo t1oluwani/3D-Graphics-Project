@@ -19,9 +19,9 @@
 ### ✅ Workflow & Milestones Checklist
 
 #### MVP 1: Basic Framework & Movement
-- [ ] Set up Python and OpenGL development environment
-- [ ] Create window and rendering context
-- [ ] Implement first-person camera controls (look & move)
+- [v] Set up Python and OpenGL development environment
+- [v] Create window and rendering context
+- [v] Implement first-person camera controls (look & move)
 - [ ] Render simple wireframe objects (e.g., tank model placeholder)
 - [ ] Basic tank movement mechanics (forward, backward, turn)
 
