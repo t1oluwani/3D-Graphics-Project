@@ -22,8 +22,8 @@
 - [v] Set up Python and OpenGL development environment
 - [v] Create window and rendering context
 - [v] Implement first-person camera controls (look & move)
-- [ ] Render simple wireframe objects (e.g., tank model placeholder)
-- [ ] Basic tank movement mechanics (forward, backward, turn)
+- [v] Render simple wireframe objects (e.g., tank model placeholder)
+- [v] Basic tank movement mechanics (forward, backward, turn)
 
 #### MVP 2: Shooting & Enemy AI Basics
 - [ ] Implement shooting mechanics (projectiles firing)
