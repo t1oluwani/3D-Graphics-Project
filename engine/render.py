@@ -6,6 +6,7 @@ MOUNTAIN_POINTS = 4 * [20, 50, 30, 80, 40, 20, 60, 90, 40, 30, 70, 40]
 
 # HELPER FUNCTIONS
 
+
 def begin_2d(width, height):
     # Switch to projection matrix
     glMatrixMode(GL_PROJECTION)
@@ -38,16 +39,16 @@ def end_2d():
 # RENDERING FUNCTIONS
 
 
-def draw_scope(width, height):
+def draw_scope_regular(width, height):
     # Switch to 2D mode
     begin_2d(width, height)
 
     cx = width // 2
     cy = height // 2
-    bracket_width = 125
-    bracket_height = 25
+    bracket_width = 120
+    bracket_height = 30
     vertical_gap = 60
-    vertical_line = 100
+    vertical_line = 90
 
     glColor3f(0.0, 1.0, 0.0)
     glLineWidth(2.0)
@@ -81,6 +82,56 @@ def draw_scope(width, height):
     # Right vertical arm
     glVertex2f(cx + bracket_width // 2, cy + vertical_gap)
     glVertex2f(cx + bracket_width // 2, cy + vertical_gap - bracket_height)
+
+    glEnd()
+
+    # Switch back to 3D mode
+    end_2d()
+    
+def draw_scope_target(width, height):
+    # Switch to 2D mode
+    begin_2d(width, height)
+
+    cx = width // 2
+    cy = height // 2
+    bracket_width = 120
+    bracket_height = 30
+    vertical_gap = 60
+    vertical_line = 120
+    slant = 30
+
+    glColor3f(0.0, 1.0, 0.0)
+    glLineWidth(2.0)
+
+    glBegin(GL_LINES)
+
+    # --- Top Bracket ---
+    # Vertical line
+    glVertex2f(cx, cy + vertical_gap - bracket_height)
+    glVertex2f(cx, cy + vertical_gap + vertical_line)
+    # Horizontal bar
+    glVertex2f(cx - bracket_width // 2, cy + vertical_gap)
+    glVertex2f(cx + bracket_width // 2, cy + vertical_gap)
+    # Left slanted arm
+    glVertex2f(cx - bracket_width // 2, cy - vertical_gap)
+    glVertex2f(cx - bracket_width // 2 + slant, cy - vertical_gap + bracket_height)
+    # Right slanted arm
+    glVertex2f(cx + bracket_width // 2, cy - vertical_gap)
+    glVertex2f(cx + bracket_width // 2 - slant, cy - vertical_gap + bracket_height)
+
+    # --- Bottom Bracket ---
+    # Vertical line
+    glVertex2f(cx, cy - vertical_gap + bracket_height)
+    glVertex2f(cx, cy - vertical_gap - vertical_line)
+    # Horizontal bar
+    glVertex2f(cx - bracket_width // 2, cy - vertical_gap)
+    glVertex2f(cx + bracket_width // 2, cy - vertical_gap)
+    # Left slanted arm
+    glVertex2f(cx - bracket_width // 2, cy + vertical_gap)
+    glVertex2f(cx - bracket_width // 2 + slant, cy + vertical_gap - bracket_height)
+    # Right slanted arm
+    glVertex2f(cx + bracket_width // 2, cy + vertical_gap)
+    glVertex2f(cx + bracket_width // 2 - slant, cy + vertical_gap - bracket_height)
 
     glEnd()
 
