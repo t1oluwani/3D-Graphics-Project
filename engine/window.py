@@ -1,9 +1,13 @@
 import pygame as pg
+
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from game.player import Player
 from game.world import World
+from game.enemy import Enemy
+from game.player import Player
+
+from render.models import draw_tank
 from render.terrain import draw_world
 from render.objects import draw_bullet
 from render.screen import draw_scope, draw_scope_target
@@ -26,6 +30,7 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
 
     player = Player()
     world = World(player)
+    enemy = Enemy(0, 0, 0, 0)
     running = True
     bullets = []
 
@@ -66,6 +71,9 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
 
         # Draw the world
         draw_world(world)
+        
+        # Draw the enemy tank
+        draw_tank(enemy)
 
         # Draw the scope in 2D
         width, height = pg.display.get_surface().get_size()

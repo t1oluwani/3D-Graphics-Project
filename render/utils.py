@@ -30,3 +30,30 @@ def end_draw_2d():
     glMatrixMode(GL_PROJECTION)
     glPopMatrix()
     glMatrixMode(GL_MODELVIEW)
+    
+def load_obj(path):
+    vertices = []
+    faces = []
+    lines = []
+
+    with open(path, "r") as file:
+        for line in file:
+            if line.startswith("v "):
+                parts = line.strip().split()
+                vertex = tuple(map(float, parts[1:4]))
+                vertices.append(vertex)
+
+            elif line.startswith("f "):
+                parts = line.strip().split()
+                face = []
+                for p in parts[1:]:
+                    idx = int(p.split("/")[0]) - 1
+                    face.append(idx)
+                faces.append(face)
+                
+            elif line.startswith("l "):
+                parts = line.strip().split()
+                line_indices = [int(p) - 1 for p in parts[1:]]
+                lines.append(line_indices)
+
+    return vertices, faces, lines

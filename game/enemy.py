@@ -1,6 +1,11 @@
 import math
-
 from game.bullet import Bullet
+
+def patrol():
+    pass
+
+def attack():
+    pass
 
 class Enemy:
     def __init__(self, x, y, z, angle):
