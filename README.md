@@ -28,7 +28,8 @@
 - [x] Implement shooting mechanics (projectiles firing)
 - [x] Create simple enemy models (wireframe)
 - [x] Implement maual basic enemy movement (similar to player)
-- [ ] Generate multiple enemies at random locations
+- [x] Generate multiple enemies at random locations
+- [ ] Scope detects when enemy in line and changes
 - [ ] Collision detection for projectiles and enemies
 
 #### MVP 3: Game, Effects & Gameplay
@@ -44,6 +45,5 @@
 
 **OpenGL & Game Dev Tutorials**
 
-* [ThinMatrix OpenGL Game Dev](https://www.youtube.com/watch?v=45MIykWJ-C4&ab_channel=ThinMatrix)
-* [LearnOpenGL](https://learnopengl.com/Getting-started/OpenGL)
-* [TheCherno Game Loop Tutorial](https://www.youtube.com/watch?v=1h2p9YJGf3g&ab_channel=TheCherno)
+* [Computer Graphics Basics and OpenGL](https://apps.ualberta.ca/catalogue/course/cmput/411)
+* [Tank STL and OBJ Model](https://www.thingiverse.com/thing:3695414)
