@@ -69,13 +69,19 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
             bullet.update(0.2)
             draw_bullet(bullet)
 
-        # Draw the world
+        # Draw the world (init pyramids, blocks, mountains, tanks, etc)
         draw_world(world)
+        
 
         # Draw the scope in 2D
         width, height = pg.display.get_surface().get_size()
         draw_scope(width, height)
-        # draw_scope_target(width, height)
+        
+        # for enemy in world.enemies:
+        #     if is_scope_on_enemy(scope_x, scope_y, enemy):
+        #         draw_scope_target(width, height)
+        #     else:
+        #         draw_scope(width, height)
         
         pg.display.flip()
         pg.time.wait(10)

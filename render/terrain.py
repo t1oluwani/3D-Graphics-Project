@@ -47,12 +47,15 @@ def draw_world(world):
     draw_floor(world.size)
     draw_mountains(world.ref_angle)
 
+    # Draw objects in the world
     for obj in world.objects:
-        x, z, a = obj["pos"]
+        x, z, _ = obj["pos"]
         if obj["type"] == "pyramid":
             draw_pyramid(x, z)
-        elif obj["type"] == "block":
+        else:
             draw_block(x, z)
-        elif obj["type"] == "tank":
-            enemy = Enemy(x, 0, z, a)
-            draw_tank(enemy)
+            
+    # Draw enemies in the world
+    for enemy in world.enemies:
+        x, z, a = enemy["pos"]
+        draw_tank(Enemy(x, 0, z, a))
