@@ -39,7 +39,7 @@ def end_2d():
 # RENDERING FUNCTIONS
 
 
-def draw_scope_regular(width, height):
+def draw_scope(width, height):
     # Switch to 2D mode
     begin_2d(width, height)
 
@@ -50,7 +50,7 @@ def draw_scope_regular(width, height):
     vertical_gap = 60
     vertical_line = 90
 
-    glColor3f(0.0, 1.0, 0.0)
+    glColor3f(0.0, 0.9, 0.0)
     glLineWidth(2.0)
 
     glBegin(GL_LINES)
@@ -87,7 +87,8 @@ def draw_scope_regular(width, height):
 
     # Switch back to 3D mode
     end_2d()
-    
+
+
 def draw_scope_target(width, height):
     # Switch to 2D mode
     begin_2d(width, height)
@@ -235,6 +236,33 @@ def draw_world(world):
             draw_block(x, z)
 
 
-def draw_bullet(x, y, z):
-    print(f"Drawing bullet at position ({x}, {y}, {z})")
-    # todo
+def draw_bullet(bullet):
+    s = 0.025
+
+    glPushMatrix()
+    glTranslatef(bullet.x, bullet.y, bullet.z)
+    glRotatef(-bullet.angle, 0, 1, 0)
+    glColor3f(0.0, 1.0, 0.0)
+
+    glBegin(GL_LINES)
+
+    # Bottom square
+    glVertex3f(-s,-s,-s); glVertex3f(s,-s,-s)
+    glVertex3f(s,-s,-s); glVertex3f(s,-s,s)
+    glVertex3f(s,-s,s); glVertex3f(-s,-s,s)
+    glVertex3f(-s,-s,s); glVertex3f(-s,-s,-s)
+
+    # Top square
+    glVertex3f(-s,s,-s); glVertex3f(s,s,-s)
+    glVertex3f(s,s,-s); glVertex3f(s,s,s)
+    glVertex3f(s,s,s); glVertex3f(-s,s,s)
+    glVertex3f(-s,s,s); glVertex3f(-s,s,-s)
+
+    # Vertical edges
+    glVertex3f(-s,-s,-s); glVertex3f(-s,s,-s)
+    glVertex3f(s,-s,-s); glVertex3f(s,s,-s)
+    glVertex3f(s,-s,s); glVertex3f(s,s,s)
+    glVertex3f(-s,-s,s); glVertex3f(-s,s,s)
+
+    glEnd()
+    glPopMatrix()

@@ -1,4 +1,5 @@
 import math
+from game.bullet import Bullet
 
 class Player:
     def __init__(self):
@@ -26,5 +27,4 @@ class Player:
         self.angle %= 360
 
     def shoot(self):
-        # todo
-        pass
+        return Bullet(self)

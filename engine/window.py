@@ -4,7 +4,7 @@ from OpenGL.GLU import *
 
 from game.player import Player
 from game.world import World
-from engine.render import draw_scope_regular, draw_scope_target, draw_world
+from engine.render import draw_bullet, draw_scope, draw_scope_target, draw_world
 
 
 def init_gl_state(width, height):
@@ -25,6 +25,7 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
     player = Player()
     world = World(player)
     running = True
+    bullets = []
 
     while running:
         events = pg.event.get()
@@ -45,7 +46,7 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
             if keys[pg.K_d]:
                 player.rotate_right(5)
             if keys[pg.K_SPACE]:
-                player.shoot()
+                bullets.append(player.shoot())
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
@@ -55,15 +56,20 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
         # Apply player position and angle
         glRotatef(-player.angle, 0, -1, 0)
         glTranslatef(-player.x, -player.y, -player.z)
+        
+        # Update and draw bullets
+        for bullet in bullets:
+            bullet.update(0.2)
+            draw_bullet(bullet)
 
         # Draw the world
         draw_world(world)
 
         # Draw the scope in 2D
         width, height = pg.display.get_surface().get_size()
-        draw_scope_regular(width, height)
+        draw_scope(width, height)
         # draw_scope_target(width, height)
-
+        
         pg.display.flip()
         pg.time.wait(10)
     pg.quit()
