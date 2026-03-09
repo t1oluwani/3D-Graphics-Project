@@ -54,16 +54,6 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
                 player.rotate_right(5)
             if keys[pg.K_SPACE]:
                 bullets.append(player.shoot())
-                
-            # Test enemy movement
-            if keys[pg.K_UP]:
-                enemy.move_forward(0.1)
-            if keys[pg.K_DOWN]:
-                enemy.move_backward(0.1)
-            if keys[pg.K_LEFT]:
-                enemy.rotate_left(5)
-            if keys[pg.K_RIGHT]:
-                enemy.rotate_right(5)
             
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
@@ -81,9 +71,6 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
 
         # Draw the world
         draw_world(world)
-        
-        # Draw the enemy tank
-        draw_tank(enemy)
 
         # Draw the scope in 2D
         width, height = pg.display.get_surface().get_size()

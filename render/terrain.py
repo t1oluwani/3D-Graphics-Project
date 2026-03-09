@@ -1,5 +1,8 @@
 import math
 from OpenGL.GL import *
+from game.enemy import Enemy
+
+from render.models import draw_tank
 from render.utils import MOUNTAIN_POINTS
 from render.objects import draw_block, draw_pyramid
 
@@ -45,8 +48,11 @@ def draw_world(world):
     draw_mountains(world.ref_angle)
 
     for obj in world.objects:
-        x, z = obj["pos"]
+        x, z, a = obj["pos"]
         if obj["type"] == "pyramid":
             draw_pyramid(x, z)
-        else:
+        elif obj["type"] == "block":
             draw_block(x, z)
+        elif obj["type"] == "tank":
+            enemy = Enemy(x, 0, z, a)
+            draw_tank(enemy)

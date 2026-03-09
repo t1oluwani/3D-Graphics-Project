@@ -14,12 +14,15 @@ class World:
             self.objects.append({'type': 'pyramid', 'pos': self.get_random_pos()})
         for _ in range(10):
             self.objects.append({'type': 'block', 'pos': self.get_random_pos()})
+        for _ in range(5):
+            self.objects.append({'type': 'tank', 'pos': self.get_random_pos()})
 
     def get_random_pos(self):
         while True:
             x = random.randint(-50, 50)
             z = random.randint(-50, 50)
+            a = random.randint(0, 360)
             if abs(x) > 1 or abs(z) > 1:
-                return (x, z)
+                return (x, z, a)
 
 

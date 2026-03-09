@@ -24,18 +24,18 @@
 - [x] Render simple wireframe objects (e.g., tank model placeholder)
 - [x] Basic tank movement mechanics (forward, backward, turn)
 
-#### MVP 2: Shooting & Enemy AI Basics
+#### MVP 2: Shooting & Enemy Basics
 - [x] Implement shooting mechanics (projectiles firing)
-- [x] Render projectile objects in the world
-- [ ] Create simple enemy models (wireframe)
-- [ ] Implement basic enemy movement (simple chase or patrol)
+- [x] Create simple enemy models (wireframe)
+- [x] Implement maual basic enemy movement (similar to player)
+- [ ] Generate multiple enemies at random locations
 - [ ] Collision detection for projectiles and enemies
 
-#### MVP 3: Game, Effects & Sound
+#### MVP 3: Game, Effects & Gameplay
 - [ ] Add HUD elements (score display, lives counter, etc.)  
 - [ ] Implement win/lose conditions  
 - [ ] Add game state system (menu, playing, game over) 
-- [ ] Improve enemy behavior (AI shoots player)
+- [ ] Make enemy behavior autonomous (AI patrol or attack)
 - [ ] Finishing touches + UPD readme with pictures
 
 ---
