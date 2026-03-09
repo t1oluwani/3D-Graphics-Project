@@ -25,8 +25,8 @@
 - [x] Basic tank movement mechanics (forward, backward, turn)
 
 #### MVP 2: Shooting & Enemy AI Basics
-- [ ] Implement shooting mechanics (projectiles firing)
-- [ ] Render projectile objects in the world
+- [x] Implement shooting mechanics (projectiles firing)
+- [x] Render projectile objects in the world
 - [ ] Create simple enemy models (wireframe)
 - [ ] Implement basic enemy movement (simple chase or patrol)
 - [ ] Collision detection for projectiles and enemies
