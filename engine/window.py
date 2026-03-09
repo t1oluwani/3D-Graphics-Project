@@ -4,7 +4,9 @@ from OpenGL.GLU import *
 
 from game.player import Player
 from game.world import World
-from engine.render import draw_bullet, draw_scope, draw_scope_target, draw_world
+from render.terrain import draw_world
+from render.objects import draw_bullet
+from render.screen import draw_scope, draw_scope_target
 
 
 def init_gl_state(width, height):
