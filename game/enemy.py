@@ -16,12 +16,12 @@ class Enemy:
 
     def move_forward(self, speed):
         radians = math.radians(self.angle)
-        self.x -= math.sin(radians) * speed
+        self.x += math.sin(radians) * speed
         self.z += math.cos(radians) * speed
 
     def move_backward(self, speed):
         radians = math.radians(self.angle)
-        self.x += math.sin(radians) * speed
+        self.x -= math.sin(radians) * speed
         self.z -= math.cos(radians) * speed
         
     def rotate_right(self, amount):

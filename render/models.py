@@ -8,7 +8,7 @@ def draw_tank(enemy_tank):
     glPushMatrix()
 
     glTranslatef(enemy_tank.x, enemy_tank.y - 0.25, enemy_tank.z)
-    glRotatef(enemy_tank.angle, 0, 1, 0)
+    glRotatef(enemy_tank.angle + 90, 0, 1, 0)
     glScalef(1.25, 1.25, 1.25)
     glColor3f(0, 1, 0)
 
