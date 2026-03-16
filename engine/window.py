@@ -27,6 +27,8 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
     pg.init()  # init pygame
     pg.display.set_mode((width, height), pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE)
     init_gl_state(width, height)  # setup opengl state
+    display_w, display_h = pg.display.get_surface().get_size()
+
 
     player = Player()
     world = World(player)
@@ -72,16 +74,14 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
         # Draw the world (init pyramids, blocks, mountains, tanks, etc)
         draw_world(world)
         
-
         # Draw the scope in 2D
-        width, height = pg.display.get_surface().get_size()
-        draw_scope(width, height)
+        draw_scope(display_w, display_h)
         
         # for enemy in world.enemies:
         #     if is_scope_on_enemy(scope_x, scope_y, enemy):
-        #         draw_scope_target(width, height)
+        #         draw_scope_target(display_w, display_h)
         #     else:
-        #         draw_scope(width, height)
+        #         draw_scope(display_w, display_h)
         
         pg.display.flip()
         pg.time.wait(10)
