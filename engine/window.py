@@ -3,6 +3,8 @@ import pygame as pg
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
+from game import player
+from game import enemy
 from game.world import World
 from game.enemy import Enemy
 from game.player import Player
@@ -10,7 +12,7 @@ from game.player import Player
 from render.models import draw_tank
 from render.terrain import draw_world
 from render.objects import draw_bullet
-from render.screen import draw_scope, draw_scope_target
+from render.screen import draw_scope_regular, draw_scope_target, is_scope_on_enemy
 
 
 def init_gl_state(width, height):
@@ -28,7 +30,6 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
     pg.display.set_mode((width, height), pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE)
     init_gl_state(width, height)  # setup opengl state
     display_w, display_h = pg.display.get_surface().get_size()
-
 
     player = Player()
     world = World(player)
@@ -56,7 +57,7 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
                 player.rotate_right(5)
             if keys[pg.K_SPACE]:
                 bullets.append(player.shoot())
-            
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
         glMatrixMode(GL_MODELVIEW)
@@ -65,7 +66,7 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
         # Apply player position and angle
         glRotatef(-player.angle, 0, -1, 0)
         glTranslatef(-player.x, -player.y, -player.z)
-        
+
         # Update and draw bullets
         for bullet in bullets:
             bullet.update(0.2)
@@ -73,16 +74,21 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
 
         # Draw the world (init pyramids, blocks, mountains, tanks, etc)
         draw_world(world)
-        
+
         # Draw the scope in 2D
-        draw_scope(display_w, display_h)
-        
         # for enemy in world.enemies:
-        #     if is_scope_on_enemy(scope_x, scope_y, enemy):
+        #     if is_scope_on_enemy(player, enemy, display_h, display_w):
         #         draw_scope_target(display_w, display_h)
         #     else:
-        #         draw_scope(display_w, display_h)
-        
+        #         draw_scope_regular(display_w, display_h)
+
+
+        enemy = world.enemies[0]  # just check the first enemy for now
+        if is_scope_on_enemy(player, enemy, display_h, display_w):
+            draw_scope_target(display_w, display_h)
+        else:
+            draw_scope_regular(display_w, display_h)                
+
         pg.display.flip()
         pg.time.wait(10)
     pg.quit()
