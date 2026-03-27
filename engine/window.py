@@ -14,6 +14,8 @@ from render.terrain import draw_world
 from render.objects import draw_bullet
 from render.screen import draw_scope_regular, draw_scope_target, is_scope_on_enemy
 
+from math3d.collision import enemy_collision, object_collision, shooting_collision
+
 
 def init_gl_state(width, height):
     # setup camera
@@ -76,18 +78,23 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
         draw_world(world)
 
         # Draw the scope in 2D
-        # for enemy in world.enemies:
+        draw_scope_regular(display_w, display_h)
+        
+        
+        for enemy in world.enemies:
+            enemy_collision(player, enemy)
+            
         #     if is_scope_on_enemy(player, enemy, display_h, display_w):
         #         draw_scope_target(display_w, display_h)
         #     else:
         #         draw_scope_regular(display_w, display_h)
 
 
-        enemy = world.enemies[0]  # just check the first enemy for now
-        if is_scope_on_enemy(player, enemy, display_h, display_w):
-            draw_scope_target(display_w, display_h)
-        else:
-            draw_scope_regular(display_w, display_h)                
+        # enemy = world.enemies[0]  # just check the first enemy for now
+        # if is_scope_on_enemy(player, enemy, display_h, display_w):
+        #     draw_scope_target(display_w, display_h)
+        # else:
+        #     draw_scope_regular(display_w, display_h)                
 
         pg.display.flip()
         pg.time.wait(10)
