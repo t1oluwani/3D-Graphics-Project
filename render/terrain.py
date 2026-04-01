@@ -57,5 +57,4 @@ def draw_world(world):
             
     # Draw enemies in the world
     for enemy in world.enemies:
-        x, z, a = enemy["pos"]
-        draw_tank(Enemy(x, 0, z, a))
+        draw_tank(enemy)

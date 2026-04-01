@@ -2,13 +2,12 @@
 def enemy_collision (player, enemy):
     # Simple collision check based on distance
     tolerance = 50
-    enemy_x, enemy_y, enemy_z = enemy["pos"]
-    dx = player.x - enemy_x
-    dz = player.z - enemy_z
+    dx = player.x - enemy.x
+    dz = player.z - enemy.z
     distance = (dx**2 + dz**2) ** 0.5
     if distance < tolerance:
         print(f"Player position: ({player.x}, {player.y}, {player.z})")
-        print(f"Enemy position: ({enemy_x}, {enemy_y}, {enemy_z})")
+        print(f"Enemy position: ({enemy.x}, {enemy.y}, {enemy.z})")
         print(f"Distance: {distance}, Tolerance: {tolerance}")
         print("Collision with enemy")
 

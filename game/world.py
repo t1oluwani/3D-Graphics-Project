@@ -2,6 +2,8 @@ import random
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
+from game.enemy import spawn_enemy_at
+
 class World:
     def __init__(self, player, size=2000):
         self.size = size
@@ -16,7 +18,7 @@ class World:
         for _ in range(10):
             self.objects.append({'type': 'block', 'pos': self.get_random_pos()})
         for _ in range(5):
-            self.enemies.append({'type': 'tank', 'pos': self.get_random_pos()})
+            self.enemies.append(spawn_enemy_at(*self.get_random_pos()))
 
     def get_random_pos(self):
         while True:

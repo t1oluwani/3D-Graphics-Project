@@ -9,7 +9,6 @@ from game.world import World
 from game.enemy import Enemy
 from game.player import Player
 
-from render.models import draw_tank
 from render.terrain import draw_world
 from render.objects import draw_bullet
 from render.screen import draw_scope_regular, draw_scope_target, is_scope_on_enemy

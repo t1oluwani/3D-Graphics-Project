@@ -7,6 +7,9 @@ def patrol():
 def attack():
     pass
 
+def spawn_enemy_at(x, z, angle):
+    return Enemy(x, 0, z, angle)
+    
 class Enemy:
     def __init__(self, x, y, z, angle):
         self.x = x
