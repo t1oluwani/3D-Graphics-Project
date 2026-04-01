@@ -60,9 +60,9 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
             if keys[pg.K_s]:
                 player.move_backward(0.1)
             if keys[pg.K_a]:
-                player.rotate_left(5)
+                player.rotate_left(3)
             if keys[pg.K_d]:
-                player.rotate_right(5)
+                player.rotate_right(3)
             if keys[pg.K_SPACE]:
                 bullets.append(player.shoot())
 
@@ -86,38 +86,32 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
         # Draw the scope in 2D
         draw_scope_regular(display_w, display_h)
 
+        # Player collisions
         for enemy in world.enemies:
-            for bullet in bullets:
-                if bullet_enemy_collision(bullet, enemy):
-                    print("Bullet collision with enemy")
-                    bullets.remove(bullet)
-                    world.enemies.remove(enemy) # testing with instant enemy death, can add health later
-                    break  # handle 1 collision at a time
-                
             if player_enemy_collision(player, enemy):
-                print("Player collision with enemy")
-                player.x, player.y, player.z = (
-                    old_px,
-                    old_py,
-                    old_pz,
-                )  # revert to old position
-                break  # handle 1 collision at a time
+                player.x, player.y, player.z = old_px, old_py, old_pz
+                break
+            
+            if enemy.health <= 0:
+                world.enemies.remove(enemy)
 
         for obj in world.objects:
-            for bullet in bullets:
-                if bullet_object_collision(bullet, obj):
-                    print("Bullet collision with object")
-                    bullets.remove(bullet)
-                    break  # handle 1 collision at a time
-                
             if player_object_collision(player, obj):
-                print("Player collision with object")
-                player.x, player.y, player.z = (
-                    old_px,
-                    old_py,
-                    old_pz,
-                )  # revert to old position
-                break  # handle 1 collision at a time
+                player.x, player.y, player.z = old_px, old_py, old_pz
+                break
+            
+        # Bullet collisions
+        def bullet_hit(bullet):
+            for enemy in world.enemies:
+                if bullet_enemy_collision(bullet, enemy):
+                    enemy.health -= 20
+                    return True
+            for obj in world.objects:
+                if bullet_object_collision(bullet, obj):
+                    return True
+            return False
+
+        bullets = [b for b in bullets if not bullet_hit(b)]
 
         #     if is_scope_on_enemy(player, enemy, display_h, display_w):
         #         draw_scope_target(display_w, display_h)

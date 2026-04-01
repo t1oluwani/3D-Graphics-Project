@@ -13,12 +13,12 @@ def spawn_enemy_at(x, z, angle):
     return Enemy(x, 0, z, angle)
     
 class Enemy:
-    def __init__(self, x, y, z, angle):
+    def __init__(self, x, y, z, angle, level=1):
         self.x = x
         self.y = y
         self.z = z
         self.angle = angle
-        self.health = DEFAULT_HEALTH
+        self.health = DEFAULT_HEALTH * level
 
     def move_forward(self, speed):
         radians = math.radians(self.angle)
