@@ -7,12 +7,6 @@ vertical_gap = 60
 vertical_line = 120
 slant = 30
 
-import math
-
-def is_scope_on_enemy(player, enemy, display_h, display_w):
-    # TODO
-    pass
-
 def draw_scope_regular(width, height):
     cx = width // 2
     cy = height // 2

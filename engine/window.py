@@ -9,11 +9,13 @@ from game.world import World
 from game.enemy import Enemy
 from game.player import Player
 
+from math3d.raycasting import raycast_enemy
 from render.terrain import draw_world
 from render.objects import draw_bullet
-from render.screen import draw_scope_regular, draw_scope_target, is_scope_on_enemy
+from render.screen import draw_scope_regular, draw_scope_target
 
 from math3d.collision import (
+    bullet_hit,
     player_enemy_collision,
     player_object_collision,
     bullet_enemy_collision,
@@ -56,13 +58,13 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
             keys = pg.key.get_pressed()  # ensures holding down keys works
 
             if keys[pg.K_w]:
-                player.move_forward(0.1)
+                player.move_forward()
             if keys[pg.K_s]:
-                player.move_backward(0.1)
+                player.move_backward()
             if keys[pg.K_a]:
-                player.rotate_left(3)
+                player.rotate_left()
             if keys[pg.K_d]:
-                player.rotate_right(3)
+                player.rotate_right()
             if keys[pg.K_SPACE]:
                 bullets.append(player.shoot())
 
@@ -84,14 +86,19 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
         draw_world(world)
 
         # Draw the scope in 2D
-        draw_scope_regular(display_w, display_h)
+        scope_on_enemy = any(raycast_enemy(player, enemy) for enemy in world.enemies)
+
+        if scope_on_enemy:
+            draw_scope_target(display_w, display_h)
+        else:
+            draw_scope_regular(display_w, display_h)
 
         # Player collisions
         for enemy in world.enemies:
             if player_enemy_collision(player, enemy):
                 player.x, player.y, player.z = old_px, old_py, old_pz
                 break
-            
+
             if enemy.health <= 0:
                 world.enemies.remove(enemy)
 
@@ -99,30 +106,9 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
             if player_object_collision(player, obj):
                 player.x, player.y, player.z = old_px, old_py, old_pz
                 break
-            
+
         # Bullet collisions
-        def bullet_hit(bullet):
-            for enemy in world.enemies:
-                if bullet_enemy_collision(bullet, enemy):
-                    enemy.health -= 20
-                    return True
-            for obj in world.objects:
-                if bullet_object_collision(bullet, obj):
-                    return True
-            return False
-
-        bullets = [b for b in bullets if not bullet_hit(b)]
-
-        #     if is_scope_on_enemy(player, enemy, display_h, display_w):
-        #         draw_scope_target(display_w, display_h)
-        #     else:
-        #         draw_scope_regular(display_w, display_h)
-
-        # enemy = world.enemies[0]  # just check the first enemy for now
-        # if is_scope_on_enemy(player, enemy, display_h, display_w):
-        #     draw_scope_target(display_w, display_h)
-        # else:
-        #     draw_scope_regular(display_w, display_h)
+        bullets = [b for b in bullets if not bullet_hit(b, world)]
 
         pg.display.flip()
         pg.time.wait(10)
