@@ -29,7 +29,7 @@
 - [x] Create simple enemy models (wireframe)
 - [x] Implement maual basic enemy movement (similar to player)
 - [x] Generate multiple enemies at random locations
-- [ ] Scope detects when enemy in line and changes
+- [x] Scope detects when enemy in line and changes
 - [x] Collision detection for projectiles and enemies
 
 #### MVP 3: Game, Effects & Gameplay
