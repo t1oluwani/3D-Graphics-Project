@@ -45,6 +45,8 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
                 event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE
             ):
                 running = False
+                
+            old_px, old_py, old_pz = player.x, player.y, player.z
 
             keys = pg.key.get_pressed()  # ensures holding down keys works
 
@@ -79,9 +81,13 @@ def create_window(width=1024, height=768, title="Atari Battlezone Window"):
         # Draw the scope in 2D
         draw_scope_regular(display_w, display_h)
         
-        
         for enemy in world.enemies:
-            enemy_collision(player, enemy)
+            if enemy_collision(player, enemy):
+                print("Player collision with enemy")
+                player.x, player.y, player.z = old_px, old_py, old_pz  # revert to old position
+                break # handle 1 collision at a time
+                
+                
             
         #     if is_scope_on_enemy(player, enemy, display_h, display_w):
         #         draw_scope_target(display_w, display_h)
