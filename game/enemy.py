@@ -1,6 +1,8 @@
 import math
 from game.bullet import Bullet
 
+DEFAULT_HEALTH = 100
+
 def patrol():
     pass
 
@@ -16,6 +18,7 @@ class Enemy:
         self.y = y
         self.z = z
         self.angle = angle
+        self.health = DEFAULT_HEALTH
 
     def move_forward(self, speed):
         radians = math.radians(self.angle)
