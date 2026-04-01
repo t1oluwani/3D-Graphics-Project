@@ -1,67 +1,115 @@
 import pygame as pg
+
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from classes.player import Player
-from classes.world import World
-from engine.render import draw_scope, draw_world
+from game import player
+from game import enemy
+from game.world import World
+from game.enemy import Enemy
+from game.player import Player
 
-def init_gl_state(width, height):    
+from math3d.raycasting import raycast_enemy
+from render.terrain import draw_world
+from render.objects import draw_bullet
+from render.screen import draw_scope_regular, draw_scope_target
+
+from math3d.collision import (
+    bullet_hit,
+    player_enemy_collision,
+    player_object_collision,
+    bullet_enemy_collision,
+    bullet_object_collision,
+)
+
+
+def init_gl_state(width, height):
     # setup camera
     glEnable(GL_DEPTH_TEST)
     glMatrixMode(GL_PROJECTION)
-    
+
     # setup lens
     glLoadIdentity()
-    gluPerspective(45.0, (width / height), 0.1, 50.0)  
-    
-    
+    gluPerspective(45.0, (width / height), 0.1, 50.0)
+
+
 def create_window(width=1024, height=768, title="Atari Battlezone Window"):
-    pg.init() # init pygame 
+    pg.init()  # init pygame
     pg.display.set_mode((width, height), pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE)
-    init_gl_state(width, height) # setup opengl state
-    
-    player = Player()  
-    world = World(player) 
+    init_gl_state(width, height)  # setup opengl state
+    display_w, display_h = pg.display.get_surface().get_size()
+
+    player = Player()
+    world = World(player)
+    enemy = Enemy(0, 0, -5, 0)
     running = True
-    
+    bullets = []
+
     while running:
         events = pg.event.get()
         for event in events:
-            if (event.type==pg.QUIT) or (event.type==pg.KEYDOWN and event.key==pg.K_ESCAPE):
+            if (event.type == pg.QUIT) or (
+                event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE
+            ):
                 running = False
-                
-            keys = pg.key.get_pressed() # ensures holding down keys works
-                
+
+            old_px, old_py, old_pz = player.x, player.y, player.z
+
+            keys = pg.key.get_pressed()  # ensures holding down keys works
+
             if keys[pg.K_w]:
-                player.move_forward(0.1)
+                player.move_forward()
             if keys[pg.K_s]:
-                player.move_backward(0.1)
+                player.move_backward()
             if keys[pg.K_a]:
-                player.rotate_left(5)
+                player.rotate_left()
             if keys[pg.K_d]:
-                player.rotate_right(5)
+                player.rotate_right()
             if keys[pg.K_SPACE]:
-                player.shoot()
-                            
-                
+                bullets.append(player.shoot())
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         
+
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
 
         # Apply player position and angle
         glRotatef(-player.angle, 0, -1, 0)
         glTranslatef(-player.x, -player.y, -player.z)
-        
-        # Draw the world
+
+        # Update and draw bullets
+        for bullet in bullets:
+            bullet.update(0.2)
+            draw_bullet(bullet)
+
+        # Draw the world (init pyramids, blocks, mountains, tanks, etc)
         draw_world(world)
-        
+
         # Draw the scope in 2D
-        width, height = pg.display.get_surface().get_size()
-        draw_scope(width, height)
-        
+        scope_on_enemy = any(raycast_enemy(player, enemy) for enemy in world.enemies)
+
+        if scope_on_enemy:
+            draw_scope_target(display_w, display_h)
+        else:
+            draw_scope_regular(display_w, display_h)
+
+        # Player collisions
+        for enemy in world.enemies:
+            if player_enemy_collision(player, enemy):
+                player.x, player.y, player.z = old_px, old_py, old_pz
+                break
+
+            if enemy.health <= 0:
+                world.enemies.remove(enemy)
+
+        for obj in world.objects:
+            if player_object_collision(player, obj):
+                player.x, player.y, player.z = old_px, old_py, old_pz
+                break
+
+        # Bullet collisions
+        bullets = [b for b in bullets if not bullet_hit(b, world)]
+
         pg.display.flip()
         pg.time.wait(10)
     pg.quit()
-            
