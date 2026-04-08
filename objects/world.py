@@ -5,11 +5,12 @@ from OpenGL.GLU import *
 from objects.enemy import spawn_enemy_at
 
 class World:
-    def __init__(self, player, level, size=2000):
+    def __init__(self, player, level, max_level=3, size=2000):
         self.size = size
         self.objects = []
         self.enemies = []
         self.level = level
+        self.max_level = max_level
         self.ref_angle = player.angle
         self.generate_world()
 
@@ -24,20 +25,25 @@ class World:
                 return (x, z, a)
             
     def generate_world(self):
-        difficulty_factor = self.level*2
+        difficulty_factor = (self.level-1)*2
                 
-        for _ in range(11 + difficulty_factor):
+        for _ in range(12 + difficulty_factor*2):
             self.objects.append({'type': 'pyramid', 'pos': self.get_random_pos()})
-        for _ in range(10 + difficulty_factor):
+        for _ in range(9 + difficulty_factor*2):
             self.objects.append({'type': 'block', 'pos': self.get_random_pos()})
-        for _ in range(5 + difficulty_factor):
+        for _ in range(3 + difficulty_factor):
             self.enemies.append(spawn_enemy_at(*self.get_random_pos()))
+            
+        self.init_enemy_count = len(self.enemies)
             
     def clear_world(self):
         self.objects = []
         self.enemies = []
             
     def update_level(self, player):
+        if self.level >= self.max_level:
+            self.game_over = True
+            return
         self.level += 1
         self.clear_world()
         self.ref_angle = player.angle
