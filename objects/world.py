@@ -5,7 +5,7 @@ from OpenGL.GLU import *
 from objects.enemy import spawn_enemy_at
 
 class World:
-    def __init__(self, player, level, max_level=3, size=2000):
+    def __init__(self, player, level, max_level=1, size=2000):
         self.size = size
         self.objects = []
         self.enemies = []
@@ -41,9 +41,6 @@ class World:
         self.enemies = []
             
     def update_level(self, player):
-        if self.level >= self.max_level:
-            self.game_over = True
-            return
         self.level += 1
         self.clear_world()
         self.ref_angle = player.angle

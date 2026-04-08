@@ -47,7 +47,7 @@ def create_window(width, height, title, game):
     running = True
     bullets = []
 
-    while running and not game.game_over:
+    while running and not game.game_over():
         events = pg.event.get()
         
         for event in events:
@@ -119,7 +119,7 @@ def create_window(width, height, title, game):
         
         # Level handling (TODO: congrats and next level screen)
         if not game.world.enemies:  # if all enemies defeated, move to next level
-            game.world.update_level(game.player)
+            game.next_level()
 
         draw_hud(game, display_w, display_h)
         pg.display.flip()

@@ -33,11 +33,15 @@
 - [x] Collision detection for projectiles and enemies
 
 #### MVP 3: Game, Effects & Gameplay
-- [ ] Add HUD elements (score display, lives counter, etc.)  
-- [ ] Implement win/lose conditions  
+- [x] Add HUD elements (score display, lives counter, etc.)  
+- [x] Implement win/lose conditions  
+- [ ] todos: enemy that spawn in safezone get moved back not deleted, smoother wasd movement, better bullets (sphere, faster and no spamming) etc
 - [ ] Add game state system (menu, playing, game over) 
 - [ ] Make enemy behavior autonomous (AI patrol or attack)
-- [ ] Create a minimap maybe
+  - [ ] hiders (hide and run away till you're in range) (majority in hard mode, minority in easy)
+  - [ ] hunters (hunt you from jump and chase relentlessly) (majority in medium mode)
+  - [ ] patrollers (circle a certain area till you're in range) (majority in easy mode, minority in hard)
+- [ ] Raytracing hindered by obstacles (leaving for easy testing)
 - [ ] Finishing touches + UPD readme with pictures
 
 ---
