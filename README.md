@@ -37,6 +37,7 @@
 - [ ] Implement win/lose conditions  
 - [ ] Add game state system (menu, playing, game over) 
 - [ ] Make enemy behavior autonomous (AI patrol or attack)
+- [ ] Create a minimap maybe
 - [ ] Finishing touches + UPD readme with pictures
 
 ---
