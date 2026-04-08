@@ -13,6 +13,16 @@ class World:
         self.ref_angle = player.angle
         self.generate_world()
 
+    def get_random_pos(self):
+        player_safe_zone = 5  # objects won't spawn within this distance of the player
+        
+        while True:
+            x = random.randint(-50, 50) 
+            z = random.randint(-50, 50)
+            a = random.randint(0, 360)
+            if abs(x) > player_safe_zone or abs(z) > player_safe_zone:  # ensure objects don't spawn too close to the player
+                return (x, z, a)
+            
     def generate_world(self):
         difficulty_factor = self.level*2
                 
@@ -26,16 +36,6 @@ class World:
     def clear_world(self):
         self.objects = []
         self.enemies = []
-
-    def get_random_pos(self):
-        player_safe_zone = 5  # objects won't spawn within this distance of the player
-        
-        while True:
-            x = random.randint(-50, 50) 
-            z = random.randint(-50, 50)
-            a = random.randint(0, 360)
-            if abs(x) > player_safe_zone or abs(z) > player_safe_zone:  # ensure objects don't spawn too close to the player
-                return (x, z, a)
             
     def update_level(self, player):
         self.level += 1

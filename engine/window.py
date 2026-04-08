@@ -104,8 +104,10 @@ def create_window(width, height, title, game):
                 game.player.x, game.player.y, game.player.z = old_px, old_py, old_pz
                 break
 
+            # Upon defeating an enemy
             if enemy.health <= 0:
-                game.world.enemies.remove(enemy)
+                game.world.enemies.remove(enemy) 
+                game.score += (100*(game.world.level+1))  # accounts for lvl 0
 
         for obj in game.world.objects:
             if player_object_collision(game.player, obj):
