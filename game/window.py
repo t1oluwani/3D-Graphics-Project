@@ -33,15 +33,14 @@ def init_gl_state(width, height):
     gluPerspective(45.0, (width / height), 0.1, 50.0)
 
 
-def create_window(width=1024, height=768, title="Atari Battlezone Window"):
+def create_window(width=1024, height=768, level=10, title="Atari Battlezone Window"):
     pg.init()  # init pygame
     pg.display.set_mode((width, height), pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE)
     init_gl_state(width, height)  # setup opengl state
     display_w, display_h = pg.display.get_surface().get_size()
 
     player = Player()
-    world = World(player)
-    enemy = Enemy(0, 0, -5, 0)
+    world = World(player, level)
     running = True
     bullets = []
 
