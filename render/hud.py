@@ -1,23 +1,25 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 
-def draw_hud(score, health):
+from render.utils import begin_draw_2d, end_draw_2d
+
+def draw_hud(score, health, dw, dh):
+    begin_draw_2d(dw, dh)
     draw_score(score)
     draw_health(health)
     draw_minimap()
+    end_draw_2d()
     
 def draw_score(score):
-    glutInit()
     glColor3f(1.0, 1.0, 1.0)
-    glRasterPos2f(-0.95, 0.9)
+    glRasterPos2f(10, 30)
     for char in f'Score: {score}':
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
         
         
 def draw_health(health):
-    glutInit()
     glColor3f(1.0, 0.0, 0.0)
-    glRasterPos2f(-0.95, 0.8)
+    glRasterPos2f(10, 55)
     for char in f'Health: {health}':
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
         

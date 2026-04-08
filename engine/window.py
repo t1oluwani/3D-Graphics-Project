@@ -2,6 +2,7 @@ import pygame as pg
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
+from OpenGL.GLUT import *
 
 from objects import player
 from objects import enemy
@@ -36,6 +37,7 @@ def init_gl_state(width, height):
 
 def create_window(width, height, title, game):
     pg.init()  # init pygame
+    glutInit() # init glut 
     pg.display.set_caption(title)
     pg.display.set_mode((width, height), pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE)
     
@@ -47,7 +49,6 @@ def create_window(width, height, title, game):
 
     while running:
         events = pg.event.get()
-        draw_hud(game.score, game.health)
         
         for event in events:
             if (event.type == pg.QUIT) or (
@@ -69,6 +70,8 @@ def create_window(width, height, title, game):
                 game.player.rotate_right()
             if keys[pg.K_SPACE]:
                 bullets.append(game.player.shoot())
+            if keys[pg.K_ESCAPE]:
+                running = False
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
@@ -112,6 +115,7 @@ def create_window(width, height, title, game):
         # Bullet collisions
         bullets = [b for b in bullets if not bullet_hit(b, game.world)]
 
+        draw_hud(game.score, game.health, display_w, display_h)
         pg.display.flip()
         pg.time.wait(10)
     pg.quit()

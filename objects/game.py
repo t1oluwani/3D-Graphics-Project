@@ -21,9 +21,8 @@ class Game:
         pass
         
     def start_game(self):
-        while not self.game_over:
-            create_window(width=1024, height=768, title="Mock Atari Battlezone Window", game=self)
-            # self.update()
+        create_window(width=1024, height=768, title="Mock Atari Battlezone Window", game=self)
+        # self.update()
             
             
             

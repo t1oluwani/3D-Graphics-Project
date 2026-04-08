@@ -3,7 +3,7 @@ from OpenGL.GL import *
 MOUNTAIN_POINTS = 4 * [20, 50, 30, 80, 40, 20, 60, 90, 40, 30, 70, 40]
 
 
-def begin_draw_2d(width, height):
+def begin_draw_2d(width=500, height=500):
     # Switch to projection matrix
     glMatrixMode(GL_PROJECTION)
     glPushMatrix()
