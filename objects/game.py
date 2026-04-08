@@ -1,8 +1,7 @@
-import random
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from render.hud import draw_hud
+from engine.window import create_window
 
 class Game:
     def __init__(self, player, world):
@@ -21,10 +20,10 @@ class Game:
         #TODO
         pass
         
-    def start(self):
+    def start_game(self):
         while not self.game_over:
-            draw_hud(self.score, self.health)
-            self.update()
+            create_window(width=1024, height=768, title="Mock Atari Battlezone Window", game=self)
+            # self.update()
             
             
             

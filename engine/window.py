@@ -10,6 +10,7 @@ from objects.enemy import Enemy
 from objects.player import Player
 
 from math3d.raycasting import raycast_enemy
+from render.hud import draw_hud
 from render.terrain import draw_world
 from render.objects import draw_bullet
 from render.screen import draw_scope_regular, draw_scope_target
@@ -46,6 +47,8 @@ def create_window(width, height, title, game):
 
     while running:
         events = pg.event.get()
+        draw_hud(game.score, game.health)
+        
         for event in events:
             if (event.type == pg.QUIT) or (
                 event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE
