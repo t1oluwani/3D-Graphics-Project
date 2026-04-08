@@ -33,14 +33,14 @@ def init_gl_state(width, height):
     gluPerspective(45.0, (width / height), 0.1, 50.0)
 
 
-def create_window(width=1024, height=768, level=10, title="Atari Battlezone Window"):
+def create_window(width, height, title, game):
     pg.init()  # init pygame
+    pg.display.set_caption(title)
     pg.display.set_mode((width, height), pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE)
+    
     init_gl_state(width, height)  # setup opengl state
     display_w, display_h = pg.display.get_surface().get_size()
 
-    player = Player()
-    world = World(player, level)
     running = True
     bullets = []
 
@@ -52,20 +52,20 @@ def create_window(width=1024, height=768, level=10, title="Atari Battlezone Wind
             ):
                 running = False
 
-            old_px, old_py, old_pz = player.x, player.y, player.z
+            old_px, old_py, old_pz = game.player.x, game.player.y, game.player.z
 
             keys = pg.key.get_pressed()  # ensures holding down keys works
 
             if keys[pg.K_w]:
-                player.move_forward()
+                game.player.move_forward()
             if keys[pg.K_s]:
-                player.move_backward()
+                game.player.move_backward()
             if keys[pg.K_a]:
-                player.rotate_left()
+                game.player.rotate_left()
             if keys[pg.K_d]:
-                player.rotate_right()
+                game.player.rotate_right()
             if keys[pg.K_SPACE]:
-                bullets.append(player.shoot())
+                bullets.append(game.player.shoot())
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
@@ -73,8 +73,8 @@ def create_window(width=1024, height=768, level=10, title="Atari Battlezone Wind
         glLoadIdentity()
 
         # Apply player position and angle
-        glRotatef(-player.angle, 0, -1, 0)
-        glTranslatef(-player.x, -player.y, -player.z)
+        glRotatef(-game.player.angle, 0, -1, 0)
+        glTranslatef(-game.player.x, -game.player.y, -game.player.z)
 
         # Update and draw bullets
         for bullet in bullets:
@@ -82,10 +82,10 @@ def create_window(width=1024, height=768, level=10, title="Atari Battlezone Wind
             draw_bullet(bullet)
 
         # Draw the world (init pyramids, blocks, mountains, tanks, etc)
-        draw_world(world)
+        draw_world(game.world)
 
         # Draw the scope in 2D
-        scope_on_enemy = any(raycast_enemy(player, enemy) for enemy in world.enemies)
+        scope_on_enemy = any(raycast_enemy(game.player, enemy) for enemy in game.world.enemies)
 
         if scope_on_enemy:
             draw_scope_target(display_w, display_h)
@@ -93,21 +93,21 @@ def create_window(width=1024, height=768, level=10, title="Atari Battlezone Wind
             draw_scope_regular(display_w, display_h)
 
         # Player collisions
-        for enemy in world.enemies:
-            if player_enemy_collision(player, enemy):
-                player.x, player.y, player.z = old_px, old_py, old_pz
+        for enemy in game.world.enemies:
+            if player_enemy_collision(game.player, enemy):
+                game.player.x, game.player.y, game.player.z = old_px, old_py, old_pz
                 break
 
             if enemy.health <= 0:
-                world.enemies.remove(enemy)
+                game.world.enemies.remove(enemy)
 
-        for obj in world.objects:
-            if player_object_collision(player, obj):
-                player.x, player.y, player.z = old_px, old_py, old_pz
+        for obj in game.world.objects:
+            if player_object_collision(game.player, obj):
+                game.player.x, game.player.y, game.player.z = old_px, old_py, old_pz
                 break
 
         # Bullet collisions
-        bullets = [b for b in bullets if not bullet_hit(b, world)]
+        bullets = [b for b in bullets if not bullet_hit(b, game.world)]
 
         pg.display.flip()
         pg.time.wait(10)
