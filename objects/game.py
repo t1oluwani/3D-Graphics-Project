@@ -12,6 +12,11 @@ class Game:
         self.health = 100
         self.game_over = False
         
+    def show_menu(self):
+        #TODO
+        pass
+        
+                
     def update(self):
         #TODO
         pass

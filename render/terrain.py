@@ -1,6 +1,6 @@
 import math
 from OpenGL.GL import *
-from game.enemy import Enemy
+from objects.enemy import Enemy
 
 from render.models import draw_tank
 from render.utils import MOUNTAIN_POINTS

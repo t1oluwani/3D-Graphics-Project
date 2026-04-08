@@ -2,7 +2,7 @@ import random
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from game.enemy import spawn_enemy_at
+from objects.enemy import spawn_enemy_at
 
 class World:
     def __init__(self, player, size=2000):

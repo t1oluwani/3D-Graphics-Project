@@ -3,11 +3,11 @@ import pygame as pg
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from game import player
-from game import enemy
-from game.world import World
-from game.enemy import Enemy
-from game.player import Player
+from objects import player
+from objects import enemy
+from objects.world import World
+from objects.enemy import Enemy
+from objects.player import Player
 
 from math3d.raycasting import raycast_enemy
 from render.terrain import draw_world

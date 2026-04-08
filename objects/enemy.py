@@ -1,5 +1,5 @@
 import math
-from game.bullet import Bullet
+from objects.bullet import Bullet
 
 DEFAULT_HEALTH = 100
 

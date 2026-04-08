@@ -1,5 +1,5 @@
 import math
-from game.bullet import Bullet
+from objects.bullet import Bullet
 
 MOVEMENT_SPEED = 0.1
 ROTATION_AMOUNT = 1.5
