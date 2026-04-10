@@ -35,7 +35,7 @@
 #### MVP 3: Game, Effects & Gameplay
 - [x] Add HUD elements (score display, lives counter, etc.)  
 - [x] Implement win/lose conditions  
-- [ ] todos: enemy that spawn in safezone get moved back not deleted, smoother wasd movement, better bullets (sphere, faster and no spamming) etc
+- [ ] todos: smoother wasd movement, better bullets (sphere, faster and no spamming) etc
 - [ ] Add game state system (menu, playing, game over) 
 - [ ] Make enemy behavior autonomous (AI patrol or attack)
   - [ ] hiders (hide and run away till you're in range) (majority in hard mode, minority in easy)

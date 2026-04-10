@@ -84,7 +84,7 @@ def create_window(width, height, title, game):
 
         # Update and draw bullets
         for bullet in bullets:
-            bullet.update(0.2)
+            bullet.update(0.5)
             draw_bullet(bullet)
 
         # Draw the world (init pyramids, blocks, mountains, tanks, etc)

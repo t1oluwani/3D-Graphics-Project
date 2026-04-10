@@ -5,7 +5,7 @@ from OpenGL.GLU import *
 from objects.enemy import spawn_enemy_at
 
 class World:
-    def __init__(self, player, level, max_level=1, size=2000):
+    def __init__(self, player, level, max_level=5, size=2000):
         self.size = size
         self.objects = []
         self.enemies = []

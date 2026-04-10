@@ -1,4 +1,5 @@
 from OpenGL.GL import *
+from OpenGL.GLU import *
 
 def draw_pyramid(x, z):
     glColor3f(1.0, 1.0, 1.0)
@@ -48,32 +49,14 @@ def draw_block(x, z):
 
 
 def draw_bullet(bullet):
-    s = 0.025
+    radius = 0.025
 
     glPushMatrix()
     glTranslatef(bullet.x, bullet.y, bullet.z)
-    glRotatef(-bullet.angle, 0, 1, 0)
     glColor3f(0.0, 1.0, 0.0)
 
-    glBegin(GL_LINES)
+    quad = gluNewQuadric()
+    gluSphere(quad, radius, 16, 16)  # (quadric, radius, slices, stacks)
+    gluDeleteQuadric(quad)
 
-    # Bottom square
-    glVertex3f(-s,-s,-s); glVertex3f(s,-s,-s)
-    glVertex3f(s,-s,-s); glVertex3f(s,-s,s)
-    glVertex3f(s,-s,s); glVertex3f(-s,-s,s)
-    glVertex3f(-s,-s,s); glVertex3f(-s,-s,-s)
-
-    # Top square
-    glVertex3f(-s,s,-s); glVertex3f(s,s,-s)
-    glVertex3f(s,s,-s); glVertex3f(s,s,s)
-    glVertex3f(s,s,s); glVertex3f(-s,s,s)
-    glVertex3f(-s,s,s); glVertex3f(-s,s,-s)
-
-    # Vertical edges
-    glVertex3f(-s,-s,-s); glVertex3f(-s,s,-s)
-    glVertex3f(s,-s,-s); glVertex3f(s,s,-s)
-    glVertex3f(s,-s,s); glVertex3f(s,s,s)
-    glVertex3f(-s,-s,s); glVertex3f(-s,s,s)
-
-    glEnd()
     glPopMatrix()
