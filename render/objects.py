@@ -49,7 +49,7 @@ def draw_block(x, z):
 
 
 def draw_bullet(bullet):
-    radius = 0.025
+    radius = 0.125
 
     glPushMatrix()
     glTranslatef(bullet.x, bullet.y, bullet.z)
