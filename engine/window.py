@@ -33,11 +33,11 @@ def create_window(width, height, title, game):
     glutInit()  # init glut
     pg.display.set_caption(title)
     pg.display.set_mode((width, height), pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE)
-
-    init_gl_state(width, height)  # setup opengl state
+    
     display_w, display_h = pg.display.get_surface().get_size()
     
-    # display_menu(display_w, display_h)
+    display_menu(display_w, display_h)
+    init_gl_state(width, height)  # setup opengl state
 
     running = True
     bullets = []
