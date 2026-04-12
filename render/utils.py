@@ -30,7 +30,8 @@ def end_draw_2d():
     glMatrixMode(GL_PROJECTION)
     glPopMatrix()
     glMatrixMode(GL_MODELVIEW)
-    
+
+
 def load_obj(path):
     vertices = []
     faces = []
@@ -50,7 +51,7 @@ def load_obj(path):
                     idx = int(p.split("/")[0]) - 1
                     face.append(idx)
                 faces.append(face)
-                
+
             elif line.startswith("l "):
                 parts = line.strip().split()
                 line_indices = [int(p) - 1 for p in parts[1:]]

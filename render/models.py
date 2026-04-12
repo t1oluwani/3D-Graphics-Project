@@ -3,8 +3,8 @@ from render.utils import load_obj
 
 tank_vertices, _, tank_lines = load_obj("models/tank_wireframe.obj")
 
-def draw_tank(enemy_tank):
-    
+def draw_tank_3d(enemy_tank):
+
     glPushMatrix()
 
     glTranslatef(enemy_tank.x, enemy_tank.y - 0.25, enemy_tank.z)
@@ -25,3 +25,5 @@ def draw_tank(enemy_tank):
     glEnd()
 
     glPopMatrix()
+
+def

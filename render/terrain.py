@@ -2,9 +2,10 @@ import math
 from OpenGL.GL import *
 from objects.enemy import Enemy
 
-from render.models import draw_tank
+from render.models import draw_tank_3d
 from render.utils import MOUNTAIN_POINTS
 from render.objects import draw_block, draw_pyramid
+
 
 def draw_mountains(player_angle):
     glPushMatrix()
@@ -41,8 +42,8 @@ def draw_floor(size):
     glVertex3f(size, -1, size)
     glVertex3f(-size, -1, size)
     glEnd()
-    
-    
+
+
 def draw_world(world):
     draw_floor(world.size)
     draw_mountains(world.ref_angle)
@@ -54,7 +55,7 @@ def draw_world(world):
             draw_pyramid(x, z)
         else:
             draw_block(x, z)
-            
+
     # Draw enemies in the world
     for enemy in world.enemies:
-        draw_tank(enemy)
+        draw_tank_3d(enemy)
