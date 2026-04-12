@@ -26,4 +26,26 @@ def draw_tank_3d(enemy_tank):
 
     glPopMatrix()
 
-def
+def draw_tank_2d(display_w, display_h):
+    
+    glPushMatrix()
+
+    glTranslatef(display_w // 2, display_h // 2, 0)
+    glRotatef(180, 0, 1, 0)
+    glScalef(100, -100, 1)
+    glColor3f(0.0, 1.0, 0.0)
+    glLineWidth(2.0)
+
+    glBegin(GL_LINES)
+    
+    for line in tank_lines:
+        for i in range(len(line) - 1):
+            v1 = tank_vertices[line[i]]
+            v2 = tank_vertices[line[i + 1]]
+
+            glVertex2f(v1[0], v1[1])
+            glVertex2f(v2[0], v2[1])
+            
+    glEnd()
+
+    glPopMatrix()

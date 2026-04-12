@@ -2,6 +2,7 @@ import pygame as pg
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 
+from render.models import draw_tank_2d
 from render.utils import begin_draw_2d, end_draw_2d
 
 def display_menu(display_w, display_h):
@@ -21,7 +22,7 @@ def display_menu(display_w, display_h):
             glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
         
         # Tank Drawing
-        
+        draw_tank_2d(display_w, display_h)
         
         # Control Instructions
         glRasterPos2f(10, 50)
