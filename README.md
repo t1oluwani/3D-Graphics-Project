@@ -41,7 +41,7 @@
   - [ ] hiders (hide and run away till you're in range) (majority in hard mode, minority in easy)
   - [ ] hunters (hunt you from jump and chase relentlessly) (majority in medium mode)
   - [ ] patrollers (circle a certain area till you're in range) (majority in easy mode, minority in hard)
-- [ ] Raytracing hindered by obstacles (leaving for easy testing)
+- [ ] Raytracing hinder ed by obstacles (leaving for easy testing)
 - [ ] Finishing touches + UPD readme with pictures
 
 ---

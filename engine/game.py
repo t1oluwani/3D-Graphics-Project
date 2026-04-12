@@ -7,5 +7,4 @@ def launch_game():
     world = World(player, level=1)
     game = Game(player=player, world=world)
     
-    # start_menu() <- this will eventually trigger the game loop, but for now we can just start the game directly
     game.start_game()

@@ -12,18 +12,8 @@ class Game:
         self.game_over_loss = False
         self.game_over_win = False
         
-    def show_menu(self):
-        #TODO
-        pass
-        
-                
-    def update(self):
-        #TODO
-        pass
-        
     def start_game(self):
         create_window(width=1024, height=768, title="Mock Atari Battlezone Window", game=self)
-        # self.update()
         
     def next_level(self):
         if self.world.level >= self.world.max_level:

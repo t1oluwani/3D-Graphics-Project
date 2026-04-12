@@ -4,14 +4,10 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
-from objects import player
-from objects import enemy
-from objects.world import World
-from objects.enemy import Enemy
-from objects.player import Player
-
 from math3d.raycasting import raycast_enemy
+
 from render.hud import draw_hud
+from render.menu import display_menu
 from render.terrain import draw_world
 from render.objects import draw_bullet
 from render.screen import draw_scope_regular, draw_scope_target
@@ -37,6 +33,8 @@ def create_window(width, height, title, game):
     glutInit()  # init glut
     pg.display.set_caption(title)
     pg.display.set_mode((width, height), pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE)
+    
+    display_menu() 
 
     init_gl_state(width, height)  # setup opengl state
     display_w, display_h = pg.display.get_surface().get_size()
