@@ -27,12 +27,21 @@ def draw_tank_3d(enemy_tank):
     glPopMatrix()
 
 def draw_tank_2d(display_w, display_h):
-    
     glPushMatrix()
+    glMatrixMode(GL_PROJECTION)
+    glPushMatrix()
+    glLoadIdentity()
 
-    glTranslatef(display_w // 2, display_h // 2, 0)
-    glRotatef(180, 0, 1, 0)
-    glScalef(100, -100, 1)
+    glOrtho(-display_w // 2, display_w // 2, display_h // 2, -display_h // 2, -1000, 1000)
+
+    glMatrixMode(GL_MODELVIEW)
+    glLoadIdentity()
+
+    glTranslatef(0, 0, 0)
+    glRotatef(30, 1, 0, 0)   # tilt towards screen
+    glRotatef(200, 0, 1, 0)  # horizontal turn
+    glScalef(100, -100, 100) # scale all 3 axes
+
     glColor3f(0.0, 1.0, 0.0)
     glLineWidth(2.0)
 
@@ -42,10 +51,13 @@ def draw_tank_2d(display_w, display_h):
         for i in range(len(line) - 1):
             v1 = tank_vertices[line[i]]
             v2 = tank_vertices[line[i + 1]]
-
-            glVertex2f(v1[0], v1[1])
-            glVertex2f(v2[0], v2[1])
+            
+            glVertex3f(v1[0], v1[1], v1[2])  
+            glVertex3f(v2[0], v2[1], v2[2])
             
     glEnd()
 
+    glMatrixMode(GL_PROJECTION)
+    glPopMatrix()
+    glMatrixMode(GL_MODELVIEW)
     glPopMatrix()
