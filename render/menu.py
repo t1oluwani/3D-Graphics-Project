@@ -3,11 +3,16 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 
 from render.models import draw_tank_rotating
-from render.utils import begin_draw_2d, end_draw_2d
-
+from render.utils import (
+    begin_draw_2d,
+    end_draw_2d,
+    draw_text_centered,
+    draw_text_stroke_centered,
+)
 
 def display_menu(display_w, display_h):
     menu_open = True
+    selected = None
 
     while menu_open:
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -17,53 +22,77 @@ def display_menu(display_w, display_h):
 
         glColor3f(0.0, 1.0, 0.0)
 
+        # Pre-Title
+        draw_text_centered(
+            30, "T1OLUWANI . . . PRESENTS", display_w, GLUT_BITMAP_HELVETICA_18
+        )
+
         # Title
-        glRasterPos2f(10, 25)
-        for char in "Tio's Battlezone":
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
+        glLineWidth(12.5)
+        draw_text_stroke_centered(150, "BATTLEZONE", 0.50, display_w)
 
-        # Tank Drawing
+        # Rotating tank (a little above center of screen)
         draw_tank_rotating(display_w, display_h)
+        
+        glColor3f(0.0, 1.0, 0.0)
+        glLineWidth(3.0)
 
-        # Control Instructions
-        glRasterPos2f(10, 50)
-        for char in "Controls: W/S to Move, A/D to Rotate, SPACE to Shoot":
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, ord(char))
-        glRasterPos2f(10, 70)
-        for (
-            char
-        ) in "Shoot tanks to score points and advance levels. Avoid taking damage to survive!":
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, ord(char))
+        # Controls
+        draw_text_centered(
+            display_h * 0.66,
+            "W/S: MOVE    A/D: ROTATE    SPACE: SHOOT    ESC: QUIT",
+            display_w,
+            GLUT_BITMAP_9_BY_15,
+        )
+        
+        glLineWidth(1.5)
+        
+        # Difficulty options (bottom half)
+        draw_text_centered(
+            display_h * 0.74, "SELECT DIFFICULTY", display_w, GLUT_BITMAP_HELVETICA_12
+        )
 
-        # Game options
-        glRasterPos2f(10, 150)
-        for char in "1. Start Game (Easy)":
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
-        glRasterPos2f(10, 175)
-        for char in "2. Start Game (Normal)":
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
-        glRasterPos2f(10, 200)
-        for char in "3. Start Game (Hard)":
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
-        glRasterPos2f(10, 225)
-        for char in "Press 1, 2, or 3 to Start":
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
-        glRasterPos2f(10, 275)
-        for char in "Press ESC to Quit":
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
+        draw_text_centered(
+            display_h * 0.78,
+            "1.  EASY (3 Levels | 100 HP)",
+            display_w,
+            GLUT_BITMAP_HELVETICA_12,
+        )
+        draw_text_centered(
+            display_h * 0.82,
+            "2.  NORMAL (5 Levels | 150 HP)",
+            display_w,
+            GLUT_BITMAP_HELVETICA_12,
+        )
+        draw_text_centered(
+            display_h * 0.86,
+            "3.  HARD (7 Levels | 200 HP)",
+            display_w,
+            GLUT_BITMAP_HELVETICA_12,
+        )
+
+        glLineWidth(1.0)
+        glColor3f(0.0, 0.8, 0.0)
+        
+        # Divider line
+        glBegin(GL_LINES)
+        glVertex2f(display_w * 0.2, display_h * 0.90)
+        glVertex2f(display_w * 0.8, display_h * 0.90)
+        glEnd()
 
         # Copyright
-        glRasterPos2f(10, display_h - 80)
-        for (
-            char
-        ) in "This is a 3D graphics project inspired by the original Battlezone game.":
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, ord(char))
-        glRasterPos2f(10, display_h - 60)
-        for char in "Original game copyright © 1983 Atari. All rights reserved.":
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, ord(char))
-        glRasterPos2f(10, display_h - 40)
-        for char in "Code and New Assets © 2024. All rights reserved.":
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, ord(char))
+        draw_text_centered(
+            display_h * 0.93,
+            "INSPIRED BY ATARI BATTLEZONE (1983)  |  © 2024 ALL RIGHTS RESERVED",
+            display_w,
+            GLUT_BITMAP_HELVETICA_12,
+        )
+        draw_text_centered(
+            display_h * 0.96,
+            "DEVELOPED BY TIOLUWANI AKINLOYE",
+            display_w,
+            GLUT_BITMAP_HELVETICA_12,
+        )
 
         end_draw_2d()
         pg.display.flip()
@@ -74,7 +103,16 @@ def display_menu(display_w, display_h):
                 exit()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_1:
+                    selected = "easy"
                     menu_open = False
                 if event.key == pg.K_2:
+                    selected = "normal"
+                    menu_open = False
+                if event.key == pg.K_3:
+                    selected = "hard"
+                    menu_open = False
+                if event.key == pg.K_ESCAPE:
                     pg.quit()
                     exit()
+
+    return selected  # pass difficulty back to game

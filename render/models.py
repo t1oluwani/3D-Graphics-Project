@@ -94,7 +94,7 @@ def draw_tank_flattened_3d(display_w, display_h):
 
 def draw_tank_rotating(display_w, display_h):
     global tank_rotation
-    tank_rotation += 0.5
+    tank_rotation += 0.1
 
     glPushMatrix()
     glMatrixMode(GL_PROJECTION)
@@ -106,7 +106,7 @@ def draw_tank_rotating(display_w, display_h):
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
-    glTranslatef(0, 0, 0)
+    glTranslatef(0, -75, 0)           # a little up from center
     glRotatef(30, 1, 0, 0)            # tilt towards screen (fixed)
     glRotatef(tank_rotation, 0, 1, 0) # horizontal spin (animated)
     glScalef(100, -100, 100)
