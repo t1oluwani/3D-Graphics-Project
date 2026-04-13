@@ -1,6 +1,10 @@
 import pygame as pg
 from OpenGL.GL import *
-from OpenGL.GLUT import *
+from OpenGL.GLUT import (
+    GLUT_BITMAP_HELVETICA_18,
+    GLUT_BITMAP_HELVETICA_12,
+    GLUT_BITMAP_9_BY_15
+)
 
 from render.models import draw_tank_rotating
 from render.utils import (

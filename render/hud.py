@@ -1,5 +1,10 @@
 from OpenGL.GL import *
-from OpenGL.GLUT import *
+from OpenGL.GLUT import (
+    GLUT_BITMAP_HELVETICA_18,
+    GLUT_BITMAP_HELVETICA_12,
+    GLUT_BITMAP_9_BY_15,
+    glutBitmapCharacter
+)
 
 from render.utils import begin_draw_2d, end_draw_2d
 
