@@ -5,7 +5,7 @@ from engine.window import create_window
 
 difficulty_settings = { # later add enemy count and ratio (there are going to be 3 enemy ai types, patrol, aggressive/chase, and hider/sniper)
     "easy": {"max_level": 3, "health": 100, "enemy_speed": 0.025},
-    "medium": {"max_level": 5, "health": 200, "enemy_speed": 0.50},
+    "normal": {"max_level": 5, "health": 200, "enemy_speed": 0.50},
     "hard": {"max_level": 7, "health": 300, "enemy_speed": 0.075},
 }
 
