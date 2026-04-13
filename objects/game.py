@@ -4,9 +4,9 @@ from OpenGL.GLU import *
 from engine.window import create_window
 
 difficulty_settings = { # later add enemy count and ratio (there are going to be 3 enemy ai types, patrol, aggressive/chase, and hider/sniper)
-    "easy": {"health": 100, "enemy_speed": 0.025},
-    "medium": {"health": 200, "enemy_speed": 0.50},
-    "hard": {"health": 300, "enemy_speed": 0.075},
+    "easy": {"max_level": 3, "health": 100, "enemy_speed": 0.025},
+    "medium": {"max_level": 5, "health": 200, "enemy_speed": 0.50},
+    "hard": {"max_level": 7, "health": 300, "enemy_speed": 0.075},
 }
 
 class Game:
@@ -23,6 +23,7 @@ class Game:
         settings = difficulty_settings.get(difficulty, difficulty_settings["easy"])
         self.difficulty = difficulty
         self.health = settings["health"]
+        self.world.max_level = settings["max_level"]
         self.world.difficulty = difficulty
         self.world.generate_world(difficulty)
         

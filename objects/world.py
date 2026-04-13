@@ -12,13 +12,13 @@ difficulty_mapping = {
 }
 
 class World:
-    def __init__(self, player, level, max_level=5, size=2000):
+    def __init__(self, player, level, size=2000):
         self.size = size
         self.objects = []
         self.enemies = []
         self.level = level
         self.difficulty = ""
-        self.max_level = max_level
+        self.max_level = 0
         self.ref_angle = player.angle
         
     def get_random_pos(self, enemy=False):
@@ -30,6 +30,7 @@ class World:
             a = random.randint(0, 360)
             if abs(x) > player_safe_zone or abs(z) > player_safe_zone:
                 return (x, z, a)
+            
             
     def generate_world(self, difficulty):
         level_factor = (self.level-1)*2
