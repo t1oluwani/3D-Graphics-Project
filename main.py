@@ -1,4 +1,4 @@
-from engine.window import create_window
+from engine.game import launch_game
 
 if __name__ == "__main__":
-    create_window()
+    launch_game()

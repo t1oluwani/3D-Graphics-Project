@@ -33,11 +33,18 @@
 - [x] Collision detection for projectiles and enemies
 
 #### MVP 3: Game, Effects & Gameplay
-- [ ] Add HUD elements (score display, lives counter, etc.)  
-- [ ] Implement win/lose conditions  
-- [ ] Add game state system (menu, playing, game over) 
+- [x] Add HUD elements (score display, lives counter, etc.)  
+- [x] Implement win/lose conditions  
+- [x] Smoothen player and bullet movements
+- [x] Add game state system (menu, playing, game over) 
+- [x] Raytracing hinder ed by obstacles (leaving for easy testing)
+
+#### MVP 4: Enemy AI & Finishing Touches
 - [ ] Make enemy behavior autonomous (AI patrol or attack)
-- [ ] Finishing touches + UPD readme with pictures
+  - [ ] snipers/hiders (hides and keeps distance then snipes from afar) (majority in hard mode, minority in easy)
+  - [ ] aggresive/hunters (hunt you from the jump and chases you relentlessly) (majority in medium mode)
+  - [ ] patrollers/guards (circles a certain area till you're in range then attacks) (majority in easy mode, minority in hard)
+- [ ] Finishing touches + UPD readme with pictures (mountains maybe)
 
 ---
 
