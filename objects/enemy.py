@@ -3,9 +3,6 @@ from objects.bullet import Bullet
 
 DEFAULT_HEALTH = 100
 
-def patrol():
-    pass
-
 def attack():
     pass
 

@@ -4,7 +4,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
-from math3d.raycasting import dev_raycast_enemy, raycast_enemy
+from math3d.raycasting import dev_raycast, raycast
 
 from render.hud import draw_hud
 from render.displays import display_game_over, display_menu
@@ -17,6 +17,7 @@ from math3d.collision import (
     player_enemy_collision,
     player_object_collision,
 )
+
 
 def init_gl_state(width, height):
     # setup camera
@@ -33,12 +34,16 @@ def create_window(width, height, title, game):
     glutInit()  # init glut
     pg.display.set_caption(title)
     pg.display.set_mode((width, height), pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE)
-    
-    display_w, display_h = pg.display.get_surface().get_size() # get actual display size (handles resizing)
-    
-    difficulty = display_menu(display_w, display_h) # show menu and get difficulty choice
+
+    display_w, display_h = (
+        pg.display.get_surface().get_size()
+    )  # get actual display size (handles resizing)
+
+    difficulty = display_menu(
+        display_w, display_h
+    )  # show menu and get difficulty choice
     game.set_difficulty(difficulty)
-    
+
     init_gl_state(width, height)  # setup opengl state
 
     running = True
@@ -86,14 +91,14 @@ def create_window(width, height, title, game):
         # Draw the world (init pyramids, blocks, mountains, tanks, etc)
         draw_world(game.world)
 
-        # Draw the scope in 2D 
+        # Draw the scope in 2D
         scope_on_enemy = any(
-            raycast_enemy(game.player, enemy, game.world.objects) for enemy in game.world.enemies
+            raycast(game.player, enemy, game.world.objects)
+            for enemy in game.world.enemies
         )
         # scope_on_enemy = any(
         #     dev_raycast_enemy(game.player, enemy) for enemy in game.world.enemies
         # )
-        
 
         if scope_on_enemy:
             draw_scope_target(display_w, display_h)
