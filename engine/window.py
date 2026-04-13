@@ -96,8 +96,9 @@ def create_window(width, height, title, game):
             raycast(game.player, enemy, game.world.objects)
             for enemy in game.world.enemies
         )
+        # For development/debug purposes, use dev_raycast which ignores obstacles:
         # scope_on_enemy = any(
-        #     dev_raycast_enemy(game.player, enemy) for enemy in game.world.enemies
+        #     dev_raycast(game.player, enemy, game.world.objects) for enemy in game.world.enemies
         # )
 
         if scope_on_enemy:

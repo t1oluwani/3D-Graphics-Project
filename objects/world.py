@@ -33,7 +33,7 @@ class World:
         for _ in range(difficulty_factor*3 + level_factor*2):
             self.objects.append({'type': 'block', 'pos': self.get_random_pos()})
         for _ in range(difficulty_factor + level_factor):
-            self.enemies.append(spawn_enemy_at(*self.get_random_pos()))
+            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level))
             
         # Debug lines (TODO: DELETE)
         print(f"Generating world for level {self.level} with difficulty '{difficulty}'...")

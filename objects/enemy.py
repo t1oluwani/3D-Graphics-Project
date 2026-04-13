@@ -6,16 +6,16 @@ DEFAULT_HEALTH = 100
 def attack():
     pass
 
-def spawn_enemy_at(x, z, angle):
-    return Enemy(x, 0, z, angle)
+def spawn_enemy_at(x, z, angle, level):
+    return Enemy(x, 0, z, angle, level)
     
 class Enemy:
-    def __init__(self, x, y, z, angle, level=1):
+    def __init__(self, x, y, z, angle, level):
         self.x = x
         self.y = y
         self.z = z
         self.angle = angle
-        self.health = DEFAULT_HEALTH * level
+        self.health = DEFAULT_HEALTH + (level - 1) * 20  
 
     def move_forward(self, speed):
         radians = math.radians(self.angle)
