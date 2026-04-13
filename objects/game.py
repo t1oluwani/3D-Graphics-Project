@@ -2,13 +2,16 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 
 from engine.window import create_window
+from render.displays import display_game_over
+
+WIDTH = 1024
+HEIGHT = 768
 
 difficulty_settings = { # later add enemy count and ratio (there are going to be 3 enemy ai types, patrol, aggressive/chase, and hider/sniper)
-    "easy": {"max_level": 3, "health": 100, "enemy_speed": 0.025},
+    "easy": {"max_level": 1, "health": 100, "enemy_speed": 0.025},
     "normal": {"max_level": 5, "health": 200, "enemy_speed": 0.50},
     "hard": {"max_level": 7, "health": 300, "enemy_speed": 0.075},
 }
-
 class Game:
     def __init__(self, player, world):
         self.player = player
@@ -28,11 +31,12 @@ class Game:
         self.world.generate_world(difficulty)
         
     def start_game(self):
-        create_window(width=1024, height=768, title="Mock Atari Battlezone Window", game=self)
+        create_window(width=WIDTH, height=HEIGHT, title="Mock Atari Battlezone Window", game=self)
         
     def next_level(self):
         if self.world.level >= self.world.max_level:
-            self.game_over_win = True
+            display_game_over(WIDTH, HEIGHT, win=True)
+            # self.game_over_win = True
             print("Congratulations! You've completed all levels!")
             return
         self.world.update_level(self.player)
@@ -40,7 +44,8 @@ class Game:
     def take_damage(self, amount):
         self.health -= amount
         if self.health <= 0:
-            self.game_over_loss = True
+            display_game_over(WIDTH, HEIGHT, win=False)
+            # self.game_over_loss = True
             print("Game Over! You've been defeated.")
         
     def game_over(self):
