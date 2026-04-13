@@ -36,9 +36,7 @@ def create_window(width, height, title, game):
     
     display_w, display_h = pg.display.get_surface().get_size() # get actual display size (handles resizing)
     
-    display_game_over(display_w, display_h, win=True) # show game over screen if player lost in previous session
-    # difficulty = display_menu(display_w, display_h) # show menu and get difficulty choice
-    difficulty = "normal" # TODO: DELETE, just for testing
+    difficulty = display_menu(display_w, display_h) # show menu and get difficulty choice
     game.set_difficulty(difficulty)
     
     init_gl_state(width, height)  # setup opengl state

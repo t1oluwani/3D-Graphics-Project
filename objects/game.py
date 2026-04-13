@@ -8,9 +8,9 @@ WIDTH = 1024
 HEIGHT = 768
 
 difficulty_settings = { # later add enemy count and ratio (there are going to be 3 enemy ai types, patrol, aggressive/chase, and hider/sniper)
-    "easy": {"max_level": 1, "health": 100, "enemy_speed": 0.025},
-    "normal": {"max_level": 5, "health": 200, "enemy_speed": 0.50},
-    "hard": {"max_level": 7, "health": 300, "enemy_speed": 0.075},
+    "easy": {"numeric": 1, "max_level": 3, "health": 100, "enemy_speed": 0.025},
+    "normal": {"numeric": 2, "max_level": 5, "health": 200, "enemy_speed": 0.50},
+    "hard": {"numeric": 3, "max_level": 7, "health": 300, "enemy_speed": 0.075},
 }
 class Game:
     def __init__(self, player, world):
@@ -24,11 +24,12 @@ class Game:
         
     def set_difficulty(self, difficulty):
         settings = difficulty_settings.get(difficulty, difficulty_settings["easy"])
+        numeric_difficulty = settings["numeric"]
         self.difficulty = difficulty
         self.health = settings["health"]
         self.world.max_level = settings["max_level"]
-        self.world.difficulty = difficulty
-        self.world.generate_world(difficulty)
+        self.world.difficulty = numeric_difficulty
+        self.world.generate_world(numeric_difficulty)
         
     def start_game(self):
         create_window(width=WIDTH, height=HEIGHT, title="Mock Atari Battlezone Window", game=self)

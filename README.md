@@ -36,13 +36,13 @@
 - [x] Add HUD elements (score display, lives counter, etc.)  
 - [x] Implement win/lose conditions  
 - [x] Smoothen player and bullet movements
-- [ ] Add game state system (menu, playing, game over) 
+- [x] Add game state system (menu, playing, game over) 
 - [ ] Make enemy behavior autonomous (AI patrol or attack)
   - [ ] hiders (hide and run away till you're in range) (majority in hard mode, minority in easy)
   - [ ] hunters (hunt you from jump and chase relentlessly) (majority in medium mode)
   - [ ] patrollers (circle a certain area till you're in range) (majority in easy mode, minority in hard)
 - [ ] Raytracing hinder ed by obstacles (leaving for easy testing)
-- [ ] Finishing touches + UPD readme with pictures
+- [ ] Finishing touches + UPD readme with pictures (mountains maybe)
 
 ---
 

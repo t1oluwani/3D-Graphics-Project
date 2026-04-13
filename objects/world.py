@@ -3,21 +3,13 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 
 from objects.enemy import spawn_enemy_at
-
-difficulty_mapping = {
-    "": 1,
-    "easy": 1,
-    "normal": 2,
-    "hard": 3
-}
-
 class World:
     def __init__(self, player, level, size=2000):
         self.size = size
         self.objects = []
         self.enemies = []
         self.level = level
-        self.difficulty = ""
+        self.difficulty = 0
         self.max_level = 0
         self.ref_angle = player.angle
         
@@ -34,7 +26,7 @@ class World:
             
     def generate_world(self, difficulty):
         level_factor = (self.level-1)*2
-        difficulty_factor = difficulty_mapping.get(difficulty, 1) + 2
+        difficulty_factor = difficulty + 2
                 
         for _ in range(difficulty_factor*4 + level_factor*2):
             self.objects.append({'type': 'pyramid', 'pos': self.get_random_pos()})

@@ -9,7 +9,7 @@ def draw_hud(game, dw, dh):
     
     begin_draw_2d(dw, dh)
     draw_level(game.world, dw)
-    draw_difficulty(game.world.difficulty, dw)
+    draw_difficulty(game.difficulty, dw)
     draw_score(game.score)
     draw_health(game.health)
     draw_enemy_count(curr_enemies, init_enemies)
