@@ -32,7 +32,7 @@ def display_menu(display_w, display_h):
         glColor3f(0.0, 1.0, 0.0)
 
         # Pre-Title
-        draw_text_centered(30, "T1OLUWANI . . . PRESENTS", display_w, FONT_LARGE)
+        draw_text_centered(50, "T1OLUWANI . . . PRESENTS", display_w, FONT_LARGE)
 
         # Title
         glLineWidth(12.5)
@@ -54,8 +54,8 @@ def display_menu(display_w, display_h):
 
         glLineWidth(1.5)
 
-        # Difficulty options (bottom half)
-        draw_text_centered(display_h * 0.74, "SELECT DIFFICULTY", display_w, FONT_SMALL)
+        # Difficulty options (bottom half) - extra space is for spacing
+        draw_text_centered(display_h * 0.74, "SELECT DIFFICULTY   ", display_w, FONT_SMALL)
 
         draw_text_centered(
             display_h * 0.78,
@@ -77,18 +77,18 @@ def display_menu(display_w, display_h):
         )
 
         glLineWidth(1.0)
-        glColor3f(0.0, 0.8, 0.0)
+        glColor3f(0.5, 0.7, 1.0)
 
         # Divider line
         glBegin(GL_LINES)
         glVertex2f(display_w * 0.2, display_h * 0.90)
         glVertex2f(display_w * 0.8, display_h * 0.90)
         glEnd()
-
+        
         # Copyright
         draw_text_centered(
             display_h * 0.93,
-            "INSPIRED BY ATARI BATTLEZONE (1983)  |  © 2024 ALL RIGHTS RESERVED",
+            "INSPIRED BY ATARI BATTLEZONE (1983)  |  © 2026 ALL RIGHTS RESERVED",
             display_w,
             FONT_SMALL,
         )
