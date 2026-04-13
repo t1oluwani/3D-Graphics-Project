@@ -7,7 +7,7 @@ from objects.enemy import spawn_enemy_at
 difficulty_mapping = {
     "": 1,
     "easy": 1,
-    "medium": 2,
+    "normal": 2,
     "hard": 3
 }
 
