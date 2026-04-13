@@ -4,7 +4,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
-from math3d.raycasting import raycast_enemy
+from math3d.raycasting import dev_raycast_enemy, raycast_enemy
 
 from render.hud import draw_hud
 from render.displays import display_game_over, display_menu
@@ -86,10 +86,14 @@ def create_window(width, height, title, game):
         # Draw the world (init pyramids, blocks, mountains, tanks, etc)
         draw_world(game.world)
 
-        # Draw the scope in 2D
+        # Draw the scope in 2D 
         scope_on_enemy = any(
-            raycast_enemy(game.player, enemy) for enemy in game.world.enemies
+            raycast_enemy(game.player, enemy, game.world.objects) for enemy in game.world.enemies
         )
+        # scope_on_enemy = any(
+        #     dev_raycast_enemy(game.player, enemy) for enemy in game.world.enemies
+        # )
+        
 
         if scope_on_enemy:
             draw_scope_target(display_w, display_h)

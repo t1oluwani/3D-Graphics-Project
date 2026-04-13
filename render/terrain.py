@@ -14,7 +14,7 @@ def draw_mountains(player_angle):
     glColor3f(0.0, 0.8, 0.0)
     glLineWidth(2)
 
-    radius = 40
+    radius = 55
     height_scale = 0.1
     num_points = len(MOUNTAIN_POINTS)
 
