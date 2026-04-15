@@ -1,7 +1,5 @@
 import math
 
-from objects.player import Player
-
 class Bullet:
     def __init__(self, shooter, shooter_type):
         self.x = shooter.x

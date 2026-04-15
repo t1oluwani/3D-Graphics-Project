@@ -18,7 +18,6 @@ from math3d.collision import (
     player_object_collision,
 )
 
-
 def init_gl_state(width, height):
     # setup camera
     glEnable(GL_DEPTH_TEST)
@@ -26,7 +25,7 @@ def init_gl_state(width, height):
 
     # setup lens
     glLoadIdentity()
-    gluPerspective(45.0, (width / height), 0.1, 50.0)
+    gluPerspective(40.0, (width / height), 0.1, 500.0)
 
 
 def create_window(width, height, title, game):

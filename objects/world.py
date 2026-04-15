@@ -15,7 +15,7 @@ class World:
         self.ref_angle = player.angle
         
     def get_random_pos(self, enemy=False):
-        player_safe_zone = 5 if enemy else 1 # differing safe zones for enemies vs objects 
+        player_safe_zone = 3 if enemy else 0.5 # differing safe zones for enemies vs objects 
             
         while True:
             x = random.randint(-50, 50) 

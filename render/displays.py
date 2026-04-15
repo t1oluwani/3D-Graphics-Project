@@ -13,11 +13,11 @@ from render.utils import (
     draw_text_centered,
     draw_text_stroke_centered,
 )
+from engine.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 FONT_LARGE = GLUT_BITMAP_HELVETICA_18
 FONT_SMALL = GLUT_BITMAP_HELVETICA_12
 FONT_UNIQUE = GLUT_BITMAP_9_BY_15
-
 
 def display_menu(display_w, display_h):
     menu_open = True
@@ -124,6 +124,9 @@ def display_menu(display_w, display_h):
 
 
 def display_game_over(display_w, display_h, win=False):
+    display_w = SCREEN_WIDTH
+    display_h = SCREEN_HEIGHT
+    
     game_over_screen = True
     y_val = display_h * 0.40
     size = 0.75
