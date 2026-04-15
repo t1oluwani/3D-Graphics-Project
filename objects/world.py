@@ -36,10 +36,6 @@ class World:
         for _ in range(difficulty_factor + level_factor):
             self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level))
             
-        # Debug lines (TODO: DELETE)
-        print(f"Generating world for level {self.level} with difficulty '{difficulty}'...")
-        print(f"Generated {len(self.objects)} objects and {len(self.enemies)} enemies.")
-            
         self.init_enemy_count = len(self.enemies)
             
     def clear_world(self):

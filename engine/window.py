@@ -26,7 +26,10 @@ def init_gl_state(width, height):
     # setup lens
     glLoadIdentity()
     gluPerspective(40.0, (width / height), 0.1, 500.0)
-
+    
+def append_bullet(bullet, bullets):
+    if bullet is not None:
+        bullets.append(bullet)
 
 def create_window(width, height, title, game):
     pg.init()  # init pygame
@@ -56,7 +59,7 @@ def create_window(width, height, title, game):
                 running = False
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_SPACE:
-                    bullets.append(game.player.shoot())
+                    append_bullet(game.player.shoot(), bullets)
                 if event.key == pg.K_ESCAPE:
                     running = False
 
@@ -103,7 +106,7 @@ def create_window(width, height, title, game):
 
         # Enemy updates and collisions
         for enemy in game.world.enemies:
-            enemy.update(game.player) # moves enemy
+            append_bullet(enemy.update(game.player), bullets) # enemy moves and shoots
             
             if player_enemy_collision(game.player, enemy):
                 game.player.x, game.player.y, game.player.z = old_px, old_py, old_pz

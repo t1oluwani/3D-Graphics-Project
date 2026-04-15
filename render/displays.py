@@ -13,7 +13,7 @@ from render.utils import (
     draw_text_centered,
     draw_text_stroke_centered,
 )
-from engine.config import SCREEN_WIDTH, SCREEN_HEIGHT
+from engine.configs import SCREEN_WIDTH, SCREEN_HEIGHT
 
 FONT_LARGE = GLUT_BITMAP_HELVETICA_18
 FONT_SMALL = GLUT_BITMAP_HELVETICA_12

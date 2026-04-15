@@ -19,7 +19,6 @@ def simple_enemy(enemy, player):
     # Shoot if within range
     if distance < 15.0:
         return enemy.shoot()
-        pass
 
 def hunter(enemy, player):
     pass
