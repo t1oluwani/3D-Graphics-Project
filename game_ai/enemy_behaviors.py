@@ -1,6 +1,7 @@
 import math
+import time
 
-def simple_enemy(enemy, player):
+def simple_enemy(enemy, player, cooldown=5.0):
     dx = player.x - enemy.x
     dz = player.z - enemy.z
     distance = math.sqrt(dx**2 + dz**2)
@@ -16,9 +17,12 @@ def simple_enemy(enemy, player):
     else:
         enemy.rotate_right(min(5, angle_diff))
 
-    # Shoot if within range
+    # Shoot if within range (with a cooldown)
     if distance < 15.0:
-        return enemy.shoot()
+        now = time.time()
+        if not hasattr(enemy, "last_shot") or now - enemy.last_shot > cooldown:
+            enemy.last_shot = now
+            return enemy.shoot()
 
 def hunter(enemy, player):
     pass

@@ -123,7 +123,7 @@ def display_menu(display_w, display_h):
     return selected  # pass difficulty back to game
 
 
-def display_game_over(display_w, display_h, win=False):
+def display_game_over(win=False):
     display_w = SCREEN_WIDTH
     display_h = SCREEN_HEIGHT
     

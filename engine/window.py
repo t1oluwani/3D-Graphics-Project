@@ -63,7 +63,7 @@ def create_window(width, height, title, game):
                 if event.key == pg.K_ESCAPE:
                     running = False
 
-        old_px, old_py, old_pz = game.player.x, game.player.y, game.player.z
+        old_px, old_pz = game.player.x, game.player.z
 
         keys = pg.key.get_pressed()  # ensures holding down keys works
 
@@ -83,7 +83,7 @@ def create_window(width, height, title, game):
 
         # Apply player position and angle
         glRotatef(-game.player.angle, 0, -1, 0)
-        glTranslatef(-game.player.x, -game.player.y, -game.player.z)            
+        glTranslatef(-game.player.x, 0, -game.player.z)            
 
         # Update and draw bullets
         for bullet in bullets:
@@ -109,12 +109,12 @@ def create_window(width, height, title, game):
             append_bullet(enemy.update(game.player), bullets) # enemy moves and shoots
             
             if player_enemy_collision(game.player, enemy):
-                game.player.x, game.player.y, game.player.z = old_px, old_py, old_pz
+                game.player.x, game.player.z = old_px, old_pz
                 break
 
         for obj in game.world.objects:
             if player_object_collision(game.player, obj):
-                game.player.x, game.player.y, game.player.z = old_px, old_py, old_pz
+                game.player.x, game.player.z = old_px, old_pz
                 break
 
         # Bullet collisions
