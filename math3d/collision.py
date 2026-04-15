@@ -63,7 +63,7 @@ def bullet_hit(bullet, game):
     
     for enemy in game.world.enemies:
         if bullet_enemy_collision(bullet, enemy):
-            enemy.take_damage(20)
+            enemy.take_damage(20, game)
             return True
         
     for obj in game.world.objects:

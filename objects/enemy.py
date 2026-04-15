@@ -18,31 +18,25 @@ class Enemy:
         self.angle = angle
         self.health = DEFAULT_HEALTH + (level - 1) * 20  
         # self.type = ...
-
-    def move_forward(self, speed):
-        radians = math.radians(self.angle)
-        self.x += math.sin(radians) * speed
-        self.z += math.cos(radians) * speed
-
-    def move_backward(self, speed):
-        radians = math.radians(self.angle)
-        self.x -= math.sin(radians) * speed
-        self.z -= math.cos(radians) * speed
-        
-    def rotate_right(self, amount):
-        self.angle += amount
-        self.angle %= 360
-
-    def rotate_left(self, amount):
-        self.angle -= amount
-        self.angle %= 360
         
     def update(self, player):
-        return simple_enemy(self, player)
+        match self.type:
+            case "hunter":
+                return hunter(self, player)
+            case "sniper":
+                return sniper(self, player)
+            case "guard":
+                return guard(self, player)
+            case _:
+                return simple_enemy(self, player)
         
     def shoot(self):
         return Bullet(self)
     
-    def take_damage(self, amount):
+    def take_damage(self, amount, game):
         self.health -= amount
+        
+        if self.health <= 0:
+            game.world.enemies.remove(self)
+            game.score += 100 * (game.world.level)
 

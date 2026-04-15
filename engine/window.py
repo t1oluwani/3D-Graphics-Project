@@ -81,10 +81,7 @@ def create_window(width, height, title, game):
 
         # Apply player position and angle
         glRotatef(-game.player.angle, 0, -1, 0)
-        glTranslatef(-game.player.x, -game.player.y, -game.player.z)
-        
-        for enemy in game.world.enemies:
-            enemy.update(game.player)
+        glTranslatef(-game.player.x, -game.player.y, -game.player.z)            
 
         # Update and draw bullets
         for bullet in bullets:
@@ -99,26 +96,19 @@ def create_window(width, height, title, game):
             raycast(game.player, enemy, game.world.objects)
             for enemy in game.world.enemies
         )
-        # For development/debug purposes, use dev_raycast which ignores obstacles:
-        # scope_on_enemy = any(
-        #     dev_raycast(game.player, enemy, game.world.objects) for enemy in game.world.enemies
-        # )
 
         if scope_on_enemy:
             draw_scope_target(display_w, display_h)
         else:
             draw_scope_regular(display_w, display_h)
 
-        # Player collisions
+        # Enemy updates and collisions
         for enemy in game.world.enemies:
+            enemy.update(game.player) # moves enemy
+            
             if player_enemy_collision(game.player, enemy):
                 game.player.x, game.player.y, game.player.z = old_px, old_py, old_pz
                 break
-
-            # Upon defeating an enemy
-            if enemy.health <= 0:
-                game.world.enemies.remove(enemy)
-                game.score += 100 * (game.world.level)
 
         for obj in game.world.objects:
             if player_object_collision(game.player, obj):
