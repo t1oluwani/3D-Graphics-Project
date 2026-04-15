@@ -1,7 +1,7 @@
 import math
 import time
 
-def simple_enemy(enemy, player, cooldown=5.0):
+def simple_enemy(enemy, player, cooldown):
     dx = player.x - enemy.x
     dz = player.z - enemy.z
     distance = math.sqrt(dx**2 + dz**2)
@@ -24,12 +24,12 @@ def simple_enemy(enemy, player, cooldown=5.0):
             enemy.last_shot = now
             return enemy.shoot()
 
-def hunter(enemy, player):
+def hunter(enemy, player, cooldown):
     pass
 
-def sniper(enemy, player):
+def sniper(enemy, player, cooldown):
     pass
 
-def guard(enemy, player):
+def guard(enemy, player, cooldown):
     pass
 

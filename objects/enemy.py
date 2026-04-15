@@ -17,6 +17,7 @@ class Enemy:
         self.z = z
         self.angle = angle
         self.speed = 0.03 + (level - 1) * 0.015
+        self.level = level
         self.health = DEFAULT_HEALTH + (level - 1) * 20  
         self.type = ""
         
@@ -39,15 +40,17 @@ class Enemy:
         self.angle %= 360
         
     def update(self, player):
+        cooldown = 5.0 - (self.level - 1) * 0.5
+        
         match self.type:
             case "hunter":
-                return hunter(self, player)
+                return hunter(self, player, cooldown)
             case "sniper":
-                return sniper(self, player)
+                return sniper(self, player, cooldown)
             case "guard":
-                return guard(self, player)
+                return guard(self, player, cooldown)
             case _:
-                return simple_enemy(self, player)
+                return simple_enemy(self, player, cooldown)
         
     def shoot(self):
         return Bullet(self, "enemy")
