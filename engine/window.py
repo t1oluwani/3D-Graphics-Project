@@ -82,6 +82,9 @@ def create_window(width, height, title, game):
         # Apply player position and angle
         glRotatef(-game.player.angle, 0, -1, 0)
         glTranslatef(-game.player.x, -game.player.y, -game.player.z)
+        
+        for enemy in game.world.enemies:
+            enemy.update(game.player)
 
         # Update and draw bullets
         for bullet in bullets:
@@ -123,7 +126,7 @@ def create_window(width, height, title, game):
                 break
 
         # Bullet collisions
-        bullets = [b for b in bullets if not bullet_hit(b, game.world)]
+        bullets = [b for b in bullets if not bullet_hit(b, game)]
 
         # Level handling (TODO: congrats and next level screen)
         if not game.world.enemies:  # if all enemies defeated, move to next level

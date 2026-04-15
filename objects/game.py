@@ -46,7 +46,6 @@ class Game:
         self.health -= amount
         if self.health <= 0:
             display_game_over(WIDTH, HEIGHT, win=False)
-            # self.game_over_loss = True
             print("Game Over! You've been defeated.")
         
     def game_over(self):

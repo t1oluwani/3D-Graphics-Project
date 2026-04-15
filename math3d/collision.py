@@ -45,13 +45,28 @@ def bullet_object_collision(bullet, object):
 
     return distance < tolerance
 
+def bullet_player_collision(bullet, player):
+    # Check if bullet is close enough to player to count as a hit
+    dx = bullet.x - player.x
+    dz = bullet.z - player.z
 
-def bullet_hit(bullet, world):
-    for enemy in world.enemies:
+    tolerance = 1.75  # same tolerance as enemy hitbox
+    distance = (dx**2 + dz**2) ** 0.5
+
+    return distance < tolerance
+
+
+def bullet_hit(bullet, game):
+    if bullet_player_collision(bullet, game.world.player):
+        game.take_damage(5)
+        return True
+    
+    for enemy in game.world.enemies:
         if bullet_enemy_collision(bullet, enemy):
-            enemy.health -= 20
+            enemy.take_damage(20)
             return True
-    for obj in world.objects:
+        
+    for obj in game.world.objects:
         if bullet_object_collision(bullet, obj):
             return True
     return False

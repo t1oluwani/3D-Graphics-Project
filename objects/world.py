@@ -11,6 +11,7 @@ class World:
         self.level = level
         self.difficulty = 0
         self.max_level = 0
+        self.player = player
         self.ref_angle = player.angle
         
     def get_random_pos(self, enemy=False):

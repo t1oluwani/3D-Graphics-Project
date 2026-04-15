@@ -9,7 +9,7 @@ class Player:
         self.x = 0
         self.y = 0
         self.z = 0
-        self.angle = 0  # degrees
+        self.angle = 0  # remember degrees
 
     def move_forward(self, speed=MOVEMENT_SPEED):
         radians = math.radians(self.angle)
