@@ -30,4 +30,4 @@ class Player:
         self.angle %= 360
 
     def shoot(self):
-        return Bullet(self)
+        return Bullet(self, "player")

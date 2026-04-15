@@ -3,12 +3,12 @@ import math
 from objects.player import Player
 
 class Bullet:
-    def __init__(self, shooter):
+    def __init__(self, shooter, shooter_type):
         self.x = shooter.x
         self.y = shooter.y
         self.z = shooter.z
         self.angle = shooter.angle
-        self.shooter = "player" if isinstance(shooter, Player) else "enemy"
+        self.shooter = shooter_type
 
     def update(self, speed):
         radians = math.radians(self.angle)

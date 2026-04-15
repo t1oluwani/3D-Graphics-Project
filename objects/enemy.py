@@ -50,7 +50,7 @@ class Enemy:
                 return simple_enemy(self, player)
         
     def shoot(self):
-        return Bullet(self)
+        return Bullet(self, "enemy")
     
     def take_damage(self, amount, game):
         self.health -= amount
