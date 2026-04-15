@@ -5,8 +5,8 @@ def simple_enemy(enemy, player):
     dz = player.z - enemy.z
     distance = math.sqrt(dx**2 + dz**2)
 
-    if distance > 1.0:
-        enemy.move_forward(0.05)
+    if distance > 10.0:
+        enemy.move_forward(enemy.speed)
     
     # Rotate towards the player
     target_angle = math.degrees(math.atan2(dx, dz))
@@ -17,8 +17,9 @@ def simple_enemy(enemy, player):
         enemy.rotate_right(min(5, angle_diff))
 
     # Shoot if within range
-    if distance < 3.0:
+    if distance < 15.0:
         return enemy.shoot()
+        pass
 
 def hunter(enemy, player):
     pass

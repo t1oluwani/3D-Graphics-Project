@@ -16,8 +16,27 @@ class Enemy:
         self.y = y
         self.z = z
         self.angle = angle
+        self.speed = 0.03 + (level - 1) * 0.015
         self.health = DEFAULT_HEALTH + (level - 1) * 20  
-        # self.type = ...
+        self.type = ""
+        
+    def move_forward(self, speed):
+        radians = math.radians(self.angle)
+        self.x += math.sin(radians) * speed
+        self.z += math.cos(radians) * speed
+
+    def move_backward(self, speed):
+        radians = math.radians(self.angle)
+        self.x -= math.sin(radians) * speed
+        self.z -= math.cos(radians) * speed
+        
+    def rotate_right(self, amount):
+        self.angle += amount
+        self.angle %= 360
+
+    def rotate_left(self, amount):
+        self.angle -= amount
+        self.angle %= 360
         
     def update(self, player):
         match self.type:

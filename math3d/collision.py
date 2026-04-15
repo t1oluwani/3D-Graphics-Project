@@ -55,14 +55,19 @@ def bullet_player_collision(bullet, player):
 
     return distance < tolerance
 
+def is_shooter_player(bullet):
+    return bullet.shooter == "player"
+
+def is_shooter_enemy(bullet):
+    return bullet.shooter == "enemy"
 
 def bullet_hit(bullet, game):
-    if bullet_player_collision(bullet, game.world.player):
-        game.take_damage(5)
-        return True
+    if bullet_player_collision(bullet, game.world.player) and is_shooter_enemy(bullet):
+            game.take_damage(5)
+            return True
     
     for enemy in game.world.enemies:
-        if bullet_enemy_collision(bullet, enemy):
+        if bullet_enemy_collision(bullet, enemy) and is_shooter_player(bullet):
             enemy.take_damage(20, game)
             return True
         
