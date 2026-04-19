@@ -47,7 +47,7 @@ def display_menu(display_w, display_h):
         # Controls
         draw_text_centered(
             display_h * 0.66,
-            "W/S: MOVE    A/D: ROTATE    SPACE: SHOOT    ESC: QUIT",
+            "W/S: MOVE    A/D: ROTATE    Q/E: AIM     SPACE: SHOOT    ESC: QUIT",
             display_w,
             FONT_UNIQUE,
         )
@@ -121,7 +121,6 @@ def display_menu(display_w, display_h):
                     exit()
 
     return selected  # pass difficulty back to game
-
 
 def display_game_over(win=False):
     display_w = SCREEN_WIDTH

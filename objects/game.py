@@ -1,8 +1,12 @@
+import math 
+import time
+
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
 from engine.window import create_window
 from render.displays import display_game_over
+from render.screen import draw_damage_indicator
 from engine.configs import SCREEN_WIDTH, SCREEN_HEIGHT
 
 difficulty_settings = {  # later add enemy count and ratio (there are going to be 3 enemy ai types, patrol, aggressive/chase, and hider/sniper)
@@ -20,6 +24,7 @@ class Game:
         self.difficulty = ""
         self.game_over_loss = False
         self.game_over_win = False
+        self.damage_flash_start = None
 
     def set_difficulty(self, difficulty):
         settings = difficulty_settings.get(difficulty, difficulty_settings["easy"])
@@ -47,6 +52,7 @@ class Game:
         self.world.update_level(self.player)
 
     def take_damage(self, amount):
+        self.start_dmg_flash = time.time()
         self.health -= amount
         if self.health <= 0:
             display_game_over(win=False)
@@ -54,3 +60,4 @@ class Game:
 
     def game_over(self):
         return self.game_over_loss or self.game_over_win
+    
