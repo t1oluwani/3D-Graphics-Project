@@ -91,22 +91,23 @@ def draw_scope_target(width, height):
     glEnd()
     end_draw_2d()
 
-
 def draw_damage_indicator(game, width, height):
     if game.damage_flash_start is not None:
         elapsed = time.time() - game.damage_flash_start
-        duration = 0.6  # How long the flash lasts in seconds
+        duration = 0.6
 
         if elapsed < duration:
-            # Fade out
             alpha = (1.0 - elapsed / duration) * 0.7
             draw_red_borders(width, height, thickness=35, alpha=alpha)
         else:
             game.damage_flash_start = None
 
 
-def draw_red_borders(width, height, thickness=35, alpha=5):
+def draw_red_borders(width, height, thickness=35, alpha=0.5):
     begin_draw_2d(width, height)
+
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
     glColor4f(1.0, 0.0, 0.0, alpha)
 
@@ -138,4 +139,5 @@ def draw_red_borders(width, height, thickness=35, alpha=5):
 
     glEnd()
 
+    glDisable(GL_BLEND)
     end_draw_2d()

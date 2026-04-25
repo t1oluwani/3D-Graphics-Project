@@ -91,8 +91,6 @@ def create_window(width, height, title, game):
         glRotatef(-game.player.angle, 0, -1, 0)
         glTranslatef(-game.player.x, 0, -game.player.z)
         
-        draw_damage_indicator(game, display_w, display_h)
-
         # Update and draw bullets
         for bullet in bullets:
             bullet.update(0.5)
@@ -129,10 +127,13 @@ def create_window(width, height, title, game):
         bullets = [b for b in bullets if not bullet_hit(b, game)]
 
         # Level handling (TODO: congrats and next level screen)
-        if not game.world.enemies:  # if all enemies defeated, move to next level
+        if not game.world.enemies:
             game.next_level()
-
+            
+        # 2D overlays
+        draw_damage_indicator(game, display_w, display_h)
         draw_hud(game, display_w, display_h)
+        
         pg.display.flip()
         pg.time.wait(10)
     pg.quit()

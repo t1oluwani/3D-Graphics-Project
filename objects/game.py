@@ -52,7 +52,7 @@ class Game:
         self.world.update_level(self.player)
 
     def take_damage(self, amount):
-        self.start_dmg_flash = time.time()
+        self.damage_flash_start = time.time()
         self.health -= amount
         if self.health <= 0:
             display_game_over(win=False)
