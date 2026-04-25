@@ -39,7 +39,7 @@ class World:
         for _ in range(difficulty_factor*3 + level_factor*2):
             self.objects.append({'type': 'block', 'pos': self.get_random_pos()})
         for _ in range(difficulty_factor + level_factor):
-            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "sniper"))
+            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "hunter"))
             
         self.init_enemy_count = len(self.enemies)
             

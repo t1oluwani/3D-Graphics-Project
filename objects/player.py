@@ -2,7 +2,7 @@ import math
 from objects.bullet import Bullet
 
 MOVEMENT_SPEED = 0.15
-ROTATION_AMOUNT = 0.75
+ROTATION_AMOUNT = 1.0
 class Player:
     def __init__(self):
         self.x = 0

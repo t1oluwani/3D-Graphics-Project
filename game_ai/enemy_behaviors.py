@@ -1,12 +1,12 @@
 import math
 import time
 
-CLOSE_RANGE = 10
-STANDARD_RANGE = 15
+CLOSE_RANGE = 15
+STANDARD_RANGE = 25
 SNIPER_RANGE = 75
 
 GUARD_PATROL_RADIUS = 8.0
-HUNTER_CHARGE_DISTANCE = 5.0
+HUNTER_CHARGE_DISTANCE = 10.0
 
 def get_distance(enemy, player):
     dx = player.x - enemy.x
@@ -22,15 +22,15 @@ def shot_attempt(enemy, distance, range, cooldown):
 
 def simple_enemy(enemy, player, cooldown):
     """Basic enemy that moves towards the player and shoots when in range."""
-    player_distance, dx, dz = get_distance(enemy, player)
+    d_delta, dx, dz = get_distance(enemy, player)
     enemy.rotate_towards(dx, dz)
 
 
-    if player_distance > 10.0:
+    if d_delta > 10.0:
         enemy.move_forward(enemy.speed)
 
 
-    return shot_attempt(enemy, player_distance, 15.0, cooldown)
+    return shot_attempt(enemy, d_delta, 15.0, cooldown)
 
 
 def hunter(enemy, player, cooldown):
@@ -41,7 +41,7 @@ def hunter(enemy, player, cooldown):
     # Always charges unless point blank
     if d_delta > HUNTER_CHARGE_DISTANCE:
         enemy.move_forward(enemy.speed)
-    else:
+    elif d_delta > 3:
         enemy.move_forward(enemy.speed * 2)
 
     return shot_attempt(

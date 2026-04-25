@@ -114,8 +114,10 @@ def create_window(width, height, title, game):
         for enemy in game.world.enemies:
             append_bullet(enemy.update(game.player), bullets)  # enemy moves and shoots
 
-            if check_collision(game.player, enemy, 1.75):
-                game.take_damage(1)
+            if check_collision(game.player, enemy, 3):
+                game.take_damage(0.1) 
+
+            if check_collision(game.player, enemy, 1.75):    
                 game.player.x, game.player.z = old_px, old_pz
                 break
 
