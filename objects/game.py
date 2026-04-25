@@ -6,7 +6,6 @@ from OpenGL.GLU import *
 
 from engine.window import create_window
 from render.displays import display_game_over
-from render.screen import draw_damage_indicator
 from engine.configs import SCREEN_WIDTH, SCREEN_HEIGHT
 
 difficulty_settings = {  # later add enemy count and ratio (there are going to be 3 enemy ai types, patrol, aggressive/chase, and hider/sniper)

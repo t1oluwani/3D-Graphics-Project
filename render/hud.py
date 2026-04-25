@@ -42,7 +42,7 @@ def draw_score(score):
 def draw_health(health):
     glColor3f(1.0, 0.0, 0.0)
     glRasterPos2f(10, 50)
-    for char in f'Health: {health}':
+    for char in f'Health: {int(health)}':
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
         
 def draw_enemy_count(curr, init):

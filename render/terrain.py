@@ -1,9 +1,9 @@
 import math
 from OpenGL.GL import *
-from objects.enemy import Enemy
 
-from render.models import draw_tank_3d
+from engine.configs import EOW_BOUNDARY
 from render.utils import MOUNTAIN_POINTS
+from render.models import draw_tank_3d
 from render.objects import draw_block, draw_pyramid
 
 
@@ -14,7 +14,7 @@ def draw_mountains(player_angle):
     glColor3f(0.0, 0.8, 0.0)
     glLineWidth(2)
 
-    radius = 55
+    radius = EOW_BOUNDARY
     height_scale = 0.1
     num_points = len(MOUNTAIN_POINTS)
 

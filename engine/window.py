@@ -14,8 +14,8 @@ from render.screen import draw_scope_regular, draw_scope_target, draw_damage_ind
 
 from math3d.collision import (
     bullet_hit,
-    player_enemy_collision,
-    player_object_collision,
+    check_collision,
+    check_EoW_collision
 )
 
 def init_gl_state(width, height):
@@ -114,17 +114,23 @@ def create_window(width, height, title, game):
         for enemy in game.world.enemies:
             append_bullet(enemy.update(game.player), bullets)  # enemy moves and shoots
 
-            if player_enemy_collision(game.player, enemy):
+            if check_collision(game.player, enemy, 1.75):
+                game.take_damage(1)
                 game.player.x, game.player.z = old_px, old_pz
                 break
 
+        # Object collisions
         for obj in game.world.objects:
-            if player_object_collision(game.player, obj):
+            if check_collision(game.player, obj, 1.5):
                 game.player.x, game.player.z = old_px, old_pz
                 break
 
         # Bullet collisions
         bullets = [b for b in bullets if not bullet_hit(b, game)]
+
+        # EOW collisions
+        if check_EoW_collision(game.player):  
+            game.player.x, game.player.z = old_px, old_pz
 
         # Level handling (TODO: congrats and next level screen)
         if not game.world.enemies:
@@ -140,7 +146,6 @@ def create_window(width, height, title, game):
 
 
 # Working TODO List:
-# - Increase dmg per level
 # - Enable enemy collisions (objects, player, other enemies) + minor dmg on direct contact  
 # - Implement pathfinding (avoid obstacles) -> Implement AI system (H, P, S, D)
 # - Add map boundaries static vals → config vars 
