@@ -20,12 +20,6 @@ class World:
         player_safe_zone = 3 if enemy else 0.5 # differing safe zones for enemies vs objects 
             
         while True:
-            # x = random.randint(-EOW_BOUNDARY, EOW_BOUNDARY) 
-            # z = random.randint(-EOW_BOUNDARY, EOW_BOUNDARY)
-            # a = random.randint(0, 360)
-            # if abs(x) > player_safe_zone or abs(z) > player_safe_zone:
-            #     return (x, z, a)
-            
             r = EOW_BOUNDARY * (random.random() ** 0.5)
             theta = random.uniform(0, 2 * math.pi)
 
@@ -35,7 +29,6 @@ class World:
 
             if (x**2 + z**2) > player_safe_zone**2:
                 return (x, z, a)
-            
             
     def generate_world(self, difficulty):
         level_factor = (self.level-1)*2

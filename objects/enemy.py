@@ -38,6 +38,17 @@ class Enemy:
     def rotate_left(self, amount):
         self.angle -= amount
         self.angle %= 360
+
+    def rotate_towards(self, target_x, target_z, speed=5):
+        dx = target_x - self.x
+        dz = target_z - self.z
+        target_angle = math.degrees(math.atan2(dx, -dz))
+        angle_diff = (target_angle - self.angle + 360) % 360
+        if angle_diff > 180:
+            self.rotate_left(min(speed, 360 - angle_diff))
+        else:
+            self.rotate_right(min(speed, angle_diff))
+        return angle_diff
         
     def update(self, player):
         cooldown = 5.0 - (self.level - 1) * 0.5

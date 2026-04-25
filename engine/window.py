@@ -146,6 +146,4 @@ def create_window(width, height, title, game):
 
 
 # Working TODO List:
-# - Enable enemy collisions (objects, player, other enemies) + minor dmg on direct contact  
-# - Implement pathfinding (avoid obstacles) -> Implement AI system (H, P, S, D)
-# - Add map boundaries static vals → config vars 
+# - Implement pathfinding (avoid obstacles and other enemies) -> Implement AI system (H, P, S, D)
