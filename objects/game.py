@@ -53,7 +53,7 @@ class Game:
 
     def take_damage(self, amount):
         self.damage_flash_start = time.time()
-        self.health -= amount
+        self.health -= amount * (self.world.level * 0.5 + 0.5)
         if self.health <= 0:
             display_game_over(win=False)
             print("Game Over! You've been defeated.")

@@ -140,7 +140,6 @@ def create_window(width, height, title, game):
 
 
 # Working TODO List:
-# - Add red outline when player gets shot  
 # - Increase dmg per level
 # - Enable enemy collisions (objects, player, other enemies) + minor dmg on direct contact  
 # - Implement pathfinding (avoid obstacles) -> Implement AI system (H, P, S, D)

@@ -103,7 +103,7 @@ def draw_damage_indicator(game, width, height):
             game.damage_flash_start = None
 
 
-def draw_red_borders(width, height, thickness=35, alpha=0.5):
+def draw_red_borders(width, height, thickness=50, alpha=0.25):
     begin_draw_2d(width, height)
 
     glEnable(GL_BLEND)
