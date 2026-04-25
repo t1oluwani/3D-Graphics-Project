@@ -1,16 +1,17 @@
 import math
 import time
 
+CLOSE_RANGE = 10
+STANDARD_RANGE = 15
+SNIPER_RANGE = 75
+
 GUARD_PATROL_RADIUS = 8.0
-SNIPER_MIN_DISTANCE = 20.0
-SNIPER_MAX_DISTANCE = 35.0
 HUNTER_CHARGE_DISTANCE = 5.0
 
 def get_distance(enemy, player):
     dx = player.x - enemy.x
     dz = player.z - enemy.z
-    return math.sqrt(dx**2 + dz**2)
-
+    return math.sqrt(dx**2 + dz**2), dx, dz
 
 def shot_attempt(enemy, distance, range, cooldown):
     if distance < range:
@@ -19,57 +20,59 @@ def shot_attempt(enemy, distance, range, cooldown):
             enemy.last_shot = now
             return enemy.shoot()
 
-
 def simple_enemy(enemy, player, cooldown):
     """Basic enemy that moves towards the player and shoots when in range."""
-    player_distance = get_distance(enemy, player)
+    player_distance, dx, dz = get_distance(enemy, player)
+    enemy.rotate_towards(dx, dz)
+
 
     if player_distance > 10.0:
         enemy.move_forward(enemy.speed)
 
-    enemy.rotate_towards(player.x, player.z)
 
     return shot_attempt(enemy, player_distance, 15.0, cooldown)
 
 
 def hunter(enemy, player, cooldown):
     """Aggressively chases the player and closes distance to point blank."""
-    player_distance = get_distance(enemy, player)
-    enemy.rotate_towards(player.x, player.z)
+    d_delta, dx, dz = get_distance(enemy, player)
+    enemy.rotate_towards(dx, dz)
 
     # Always charges unless point blank
-    if player_distance > HUNTER_CHARGE_DISTANCE:
-        enemy.move_forward(enemy.speed * 1.5)
+    if d_delta > HUNTER_CHARGE_DISTANCE:
+        enemy.move_forward(enemy.speed)
+    else:
+        enemy.move_forward(enemy.speed * 2)
 
     return shot_attempt(
         enemy,
-        player_distance,
-        range=10.0,  # closer range
+        d_delta,
+        range=CLOSE_RANGE,  # closer range
         cooldown=(cooldown * 0.75),  # faster shooting
     )
 
-
 def sniper(enemy, player, cooldown):
     """Keeps distance and shoots from afar. Retreats if player gets too close."""
-    player_distance = get_distance(enemy, player)
-    enemy.rotate_towards(player.x, player.z)
+    d_delta, dx, dz = get_distance(enemy, player)
+    enemy.rotate_towards(dx, dz)
 
-    if player_distance < SNIPER_MIN_DISTANCE:
+    if d_delta < SNIPER_RANGE:
         enemy.move_backward(enemy.speed * 1.5)  # retreats
-    elif player_distance > SNIPER_MAX_DISTANCE:
+    elif d_delta > SNIPER_RANGE:
         enemy.move_forward(enemy.speed * 0.5)  # inches closer
     # Otherwise snipe
 
-    angle_diff = (math.degrees(math.atan2(dx, -dz)) - enemy.angle + 360) % 360
-    if angle_diff > 180:
-        angle_diff = 360 - angle_diff
-    if angle_diff < 10:  # only fires when well aimed
-        return shot_attempt(enemy, player_distance, SNIPER_MAX_DISTANCE, cooldown * 1.5)
+    return shot_attempt(
+        enemy, 
+        d_delta, 
+        range=SNIPER_RANGE,  # longer range
+        cooldown=(cooldown * 1.5) # slower shooting
+    )
 
 
 def guard(enemy, player, cooldown):
     """Patrols a fixed area. Attacks when player enters range, returns after."""
-    player_distance = get_distance(enemy, player)
+    d_delta, dx, dz = get_distance(enemy, player)
 
     # Store spawn/home position
     if not hasattr(enemy, "home_x"):
@@ -77,11 +80,11 @@ def guard(enemy, player, cooldown):
         enemy.home_z = enemy.z
         enemy.patrol_angle = 0
 
-    if player_distance < GUARD_PATROL_RADIUS * 2:
-        enemy.rotate_towards(player.x, player.z)
-        if player_distance > 5.0:
+    if d_delta < GUARD_PATROL_RADIUS * 2:
+        enemy.rotate_towards(dx, dz)
+        if d_delta > 5.0:
             enemy.move_forward(enemy.speed)
-        return shot_attempt(enemy, player_distance, 15.0, cooldown)
+        return shot_attempt(enemy, d_delta, 15.0, cooldown)
     else:
         # Player out of range — patrol home area
         home_dx = enemy.home_x - enemy.x

@@ -36,13 +36,10 @@ class Enemy:
         self.angle -= amount
         self.angle %= 360
 
-    def rotate_towards(self, tx, tz):
-        dx = tx - self.x
-        dz = tz - self.z
-
+    def rotate_towards(self, dx, dz):
         target_angle = math.degrees(math.atan2(dx, dz))
         angle_diff = (target_angle - self.angle + 360) % 360
-        
+
         if angle_diff > 180:
             self.rotate_left(min(5, 360 - angle_diff))
         else:
