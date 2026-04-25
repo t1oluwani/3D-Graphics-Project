@@ -4,14 +4,11 @@ from game_ai.enemy_behaviors import simple_enemy, hunter, sniper, guard
 
 DEFAULT_HEALTH = 100
 
-def attack():
-    pass
-
-def spawn_enemy_at(x, z, angle, level):
-    return Enemy(x, 0, z, angle, level)
+def spawn_enemy_at(x, z, angle, level, type):
+    return Enemy(x, 0, z, angle, level, type)
     
 class Enemy:
-    def __init__(self, x, y, z, angle, level):
+    def __init__(self, x, y, z, angle, level, type=""):
         self.x = x
         self.y = y
         self.z = z
@@ -19,7 +16,7 @@ class Enemy:
         self.speed = 0.03 + (level - 1) * 0.015
         self.level = level
         self.health = DEFAULT_HEALTH + (level - 1) * 20  
-        self.type = ""
+        self.type = type
         
     def move_forward(self, speed):
         radians = math.radians(self.angle)
@@ -39,15 +36,17 @@ class Enemy:
         self.angle -= amount
         self.angle %= 360
 
-    def rotate_towards(self, target_x, target_z, speed=5):
-        dx = target_x - self.x
-        dz = target_z - self.z
-        target_angle = math.degrees(math.atan2(dx, -dz))
+    def rotate_towards(self, tx, tz):
+        dx = tx - self.x
+        dz = tz - self.z
+
+        target_angle = math.degrees(math.atan2(dx, dz))
         angle_diff = (target_angle - self.angle + 360) % 360
+        
         if angle_diff > 180:
-            self.rotate_left(min(speed, 360 - angle_diff))
+            self.rotate_left(min(5, 360 - angle_diff))
         else:
-            self.rotate_right(min(speed, angle_diff))
+            self.rotate_right(min(5, angle_diff))
         return angle_diff
         
     def update(self, player):
