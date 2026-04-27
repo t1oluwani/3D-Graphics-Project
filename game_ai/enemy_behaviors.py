@@ -2,11 +2,11 @@ import math
 import time
 
 CLOSE_RANGE = 15
-STANDARD_RANGE = 25
+STANDARD_RANGE = 35
 SNIPER_RANGE = 75
-
-GUARD_PATROL_RADIUS = 8.0
-HUNTER_CHARGE_DISTANCE = 10.0
+START_CHARGE_DISTANCE = 10.0
+END_CHARGE_DISTANCE = 3.0
+PATROL_RADIUS = 8.0
 
 def get_distance(enemy, player):
     dx = player.x - enemy.x
@@ -25,23 +25,21 @@ def simple_enemy(enemy, player, cooldown):
     d_delta, dx, dz = get_distance(enemy, player)
     enemy.rotate_towards(dx, dz)
 
-
     if d_delta > 10.0:
         enemy.move_forward(enemy.speed)
-
 
     return shot_attempt(enemy, d_delta, 15.0, cooldown)
 
 
 def hunter(enemy, player, cooldown):
-    """Aggressively chases the player and closes distance to point blank."""
+    """Aggressively chases the player and closes distance to near point blank."""
     d_delta, dx, dz = get_distance(enemy, player)
     enemy.rotate_towards(dx, dz)
 
-    # Always charges unless point blank
-    if d_delta > HUNTER_CHARGE_DISTANCE:
+    # charges faster when at close range
+    if d_delta > START_CHARGE_DISTANCE:
         enemy.move_forward(enemy.speed)
-    elif d_delta > 3:
+    elif d_delta > END_CHARGE_DISTANCE:
         enemy.move_forward(enemy.speed * 2)
 
     return shot_attempt(
@@ -69,40 +67,36 @@ def sniper(enemy, player, cooldown):
         cooldown=(cooldown * 1.5) # slower shooting
     )
 
-
 def guard(enemy, player, cooldown):
-    """Patrols a fixed area. Attacks when player enters range, returns after."""
     d_delta, dx, dz = get_distance(enemy, player)
 
-    # Store spawn/home position
+    # Store spawn position
     if not hasattr(enemy, "home_x"):
         enemy.home_x = enemy.x
         enemy.home_z = enemy.z
-        enemy.patrol_angle = 0
+        enemy.patrol_angle = enemy.angle  
+        enemy.state = "patrol"
 
-    if d_delta < GUARD_PATROL_RADIUS * 2:
+    # State: attack
+    if d_delta < PATROL_RADIUS * 4:
+        enemy.state = "attack"
         enemy.rotate_towards(dx, dz)
         if d_delta > 5.0:
             enemy.move_forward(enemy.speed)
-        return shot_attempt(enemy, d_delta, 15.0, cooldown)
-    else:
-        # Player out of range — patrol home area
-        home_dx = enemy.home_x - enemy.x
-        home_dz = enemy.home_z - enemy.z
-        home_distance = math.sqrt(home_dx**2 + home_dz**2)
+        return shot_attempt(enemy, d_delta, range=STANDARD_RANGE, cooldown=cooldown)
 
-        if home_distance > GUARD_PATROL_RADIUS:
-            # Return towards home
-            enemy.rotate_towards(enemy.home_x, enemy.home_z)
-            enemy.move_forward(enemy.speed)
-        else:
-            # Circle patrol around home
-            enemy.patrol_angle = (enemy.patrol_angle + 1) % 360
-            patrol_x = enemy.home_x + math.sin(math.radians(enemy.patrol_angle)) * (
-                GUARD_PATROL_RADIUS * 0.5
-            )
-            patrol_z = enemy.home_z + math.cos(math.radians(enemy.patrol_angle)) * (
-                GUARD_PATROL_RADIUS * 0.5
-            )
-            enemy.rotate_towards(patrol_x, patrol_z)
-            enemy.move_forward(enemy.speed * 0.7)
+    # State: return home
+    home_dx = enemy.home_x - enemy.x
+    home_dz = enemy.home_z - enemy.z
+    home_distance = math.sqrt(home_dx**2 + home_dz**2)
+
+    if home_distance > PATROL_RADIUS and enemy.state != "patrol":
+        enemy.state = "returning"
+        enemy.rotate_towards(home_dx, home_dz)
+        enemy.move_forward(enemy.speed)
+    else:
+        # state: patrol
+        enemy.state = "patrol"
+        enemy.patrol_angle = (enemy.patrol_angle + 0.2) % 360
+        enemy.angle = enemy.patrol_angle
+        enemy.move_forward(enemy.speed)

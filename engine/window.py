@@ -117,7 +117,7 @@ def create_window(width, height, title, game):
             if check_collision(game.player, enemy, 3):
                 game.take_damage(0.1) 
 
-            if check_collision(game.player, enemy, 1.75):    
+            if check_collision(game.player, enemy, 1.5):    
                 game.player.x, game.player.z = old_px, old_pz
                 break
 
