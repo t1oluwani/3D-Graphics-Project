@@ -48,6 +48,7 @@ class Game:
             # self.game_over_win = True
             print("Congratulations! You've completed all levels!")
             return
+        self.health += 50
         self.world.update_level(self.player)
 
     def take_damage(self, amount):
