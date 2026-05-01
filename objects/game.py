@@ -53,7 +53,10 @@ class Game:
 
     def take_damage(self, amount):
         self.damage_flash_start = time.time()
-        self.health -= amount * (self.world.level * 0.5 + 0.5)
+        if amount < 1:
+            self.health -= amount # contact damage isn't scaled by difficulty or level
+        else:
+            self.health -= amount * (self.world.level * 0.5 + 0.5) * (1 + self.world.difficulty * 0.25)
         if self.health <= 0:
             display_game_over(win=False)
             print("Game Over! You've been defeated.")

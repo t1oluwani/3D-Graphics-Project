@@ -30,7 +30,7 @@ class World:
             if (x**2 + z**2) > player_safe_zone**2:
                 return (x, z, a)
             
-    def distribute_enemy_types(self, total_enemies, difficulty):
+    def enemy_ratio_split(self, total_enemies, difficulty):
         ratios = { # guard, hunter, and sniper respectively
             0: (0.60, 0.30, 0.10),  # easy
             1: (0.30, 0.40, 0.30),  # normal
@@ -55,7 +55,7 @@ class World:
             self.objects.append({'type': 'block', 'pos': self.get_random_pos()})
         
         total_enemies = difficulty_factor + level_factor
-        num_guards, num_hunters, num_snipers = self.distribute_enemy_types(total_enemies, difficulty)
+        num_guards, num_hunters, num_snipers = self.enemy_ratio_split(total_enemies, difficulty)
 
         for _ in range(num_guards):
             self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "guard"))
