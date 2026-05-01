@@ -44,7 +44,7 @@ class Game:
 
     def next_level(self):
         if self.world.level >= self.world.max_level:
-            display_game_over(win=True)
+            display_game_over(win=True, score=self.score)
             # self.game_over_win = True
             print("Congratulations! You've completed all levels!")
             return
@@ -58,7 +58,7 @@ class Game:
         else:
             self.health -= amount * (self.world.level * 0.5 + 0.5) * (1 + self.world.difficulty * 0.25)
         if self.health <= 0:
-            display_game_over(win=False)
+            display_game_over(win=False, score=self.score)
             print("Game Over! You've been defeated.")
 
     def game_over(self):

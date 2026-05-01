@@ -122,7 +122,7 @@ def display_menu(display_w, display_h):
 
     return selected  # pass difficulty back to game
 
-def display_game_over(win=False):
+def display_game_over(win=False, score=0):
     display_w = SCREEN_WIDTH
     display_h = SCREEN_HEIGHT
     
@@ -152,6 +152,7 @@ def display_game_over(win=False):
             glColor3f(1.0, 1.0, 1.0)
             draw_text_stroke_centered(y_val + 125, "YOU LOSE!", size_mini, display_w)
 
+        draw_text_centered(y_val + 250, f"FINAL SCORE: {score}", display_w, FONT_LARGE)
         draw_text_centered(
             display_h * 0.85,
             "PRESS 'ESC' TO QUIT",
