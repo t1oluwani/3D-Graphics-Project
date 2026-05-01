@@ -30,6 +30,21 @@ class World:
             if (x**2 + z**2) > player_safe_zone**2:
                 return (x, z, a)
             
+    def distribute_enemy_types(self, total_enemies, difficulty):
+        ratios = { # guard, hunter, and sniper respectively
+            0: (0.60, 0.30, 0.10),  # easy
+            1: (0.30, 0.40, 0.30),  # normal
+            2: (0.10, 0.40, 0.50),  # hard
+        }
+
+        guard_r, hunter_r, sniper_r = ratios.get(difficulty, (0.60, 0.30, 0.10))
+
+        num_guards  = round(total_enemies * guard_r)
+        num_hunters = round(total_enemies * hunter_r)
+        num_snipers = total_enemies - num_guards - num_hunters
+
+        return num_guards, num_hunters, num_snipers
+            
     def generate_world(self, difficulty):
         level_factor = (self.level-1)*2
         difficulty_factor = difficulty + 2
@@ -38,9 +53,17 @@ class World:
             self.objects.append({'type': 'pyramid', 'pos': self.get_random_pos()})
         for _ in range(difficulty_factor*3 + level_factor*2):
             self.objects.append({'type': 'block', 'pos': self.get_random_pos()})
-        for _ in range(difficulty_factor + level_factor):
+        
+        total_enemies = difficulty_factor + level_factor
+        num_guards, num_hunters, num_snipers = self.distribute_enemy_types(total_enemies, difficulty)
+
+        for _ in range(num_guards):
             self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "guard"))
-            
+        for _ in range(num_hunters):
+            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "hunter"))
+        for _ in range(num_snipers):
+            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "sniper"))
+                
         self.init_enemy_count = len(self.enemies)
             
     def clear_world(self):

@@ -145,7 +145,3 @@ def create_window(width, height, title, game):
         pg.display.flip()
         pg.time.wait(10)
     pg.quit()
-
-
-# Working TODO List:
-# - Implement pathfinding (avoid obstacles and other enemies) -> Implement AI system (H, P, S, D)

@@ -42,9 +42,9 @@
 #### MVP 4: Enemy AI & Finishing Touches 
 - [x] Border handling and hit signs
 - [ ] Make enemy behavior autonomous (AI patrol or attack)
-  - [ ] snipers/hiders (hides and keeps distance then snipes from afar) (majority in hard mode, minority in easy)
-  - [ ] aggresive/hunters (hunt you from the jump and chases you relentlessly) (majority in medium mode)
-  - [ ] patrollers/guards (circles a certain area till you're in range then attacks) (majority in easy mode, minority in hard)
+  - [x] snipers/hiders (hides and keeps distance then snipes from afar) (majority in hard mode, minority in easy)
+  - [x] aggresive/hunters (hunt you from the jump and chases you relentlessly) (majority in medium mode)
+  - [x] patrollers/guards (circles a certain area till you're in range then attacks) (majority in easy mode, minority in hard)
 - [ ] Finishing touches + UPD readme with pictures (mountains maybe)
 
 ---
