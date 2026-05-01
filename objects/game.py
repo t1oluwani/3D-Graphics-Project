@@ -8,10 +8,10 @@ from engine.window import create_window
 from render.displays import display_game_over
 from engine.configs import SCREEN_WIDTH, SCREEN_HEIGHT
 
-difficulty_settings = {  # later add enemy count and ratio (there are going to be 3 enemy ai types, patrol, aggressive/chase, and hider/sniper)
+difficulty_settings = {  
     "easy": {"numeric": 1, "max_level": 3, "health": 100, "enemy_speed": 0.025},
-    "normal": {"numeric": 2, "max_level": 5, "health": 200, "enemy_speed": 0.50},
-    "hard": {"numeric": 3, "max_level": 7, "health": 300, "enemy_speed": 0.075},
+    "normal": {"numeric": 2, "max_level": 5, "health": 175, "enemy_speed": 0.50},
+    "hard": {"numeric": 3, "max_level": 7, "health": 250, "enemy_speed": 0.075},
 }
 
 class Game:
