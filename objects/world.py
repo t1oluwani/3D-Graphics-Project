@@ -58,11 +58,11 @@ class World:
         num_guards, num_hunters, num_snipers = self.enemy_ratio_split(total_enemies, difficulty)
 
         for _ in range(num_guards):
-            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "guard"))
+            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "guard", self))
         for _ in range(num_hunters):
-            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "hunter"))
+            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "hunter", self))
         for _ in range(num_snipers):
-            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "sniper"))
+            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "sniper", self))
                 
         self.init_enemy_count = len(self.enemies)
             

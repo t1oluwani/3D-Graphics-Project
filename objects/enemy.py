@@ -4,11 +4,11 @@ from game_ai.enemy_behaviors import simple_enemy, hunter, sniper, guard
 
 DEFAULT_HEALTH = 100
 
-def spawn_enemy_at(x, z, angle, level, type):
-    return Enemy(x, 0, z, angle, level, type)
-    
+def spawn_enemy_at(x, z, angle, level, type, world):
+    return Enemy(x, 0, z, angle, level, type, world)
+
 class Enemy:
-    def __init__(self, x, y, z, angle, level, type=""):
+    def __init__(self, x, y, z, angle, level, type="", world=None):
         self.x = x
         self.y = y
         self.z = z
@@ -17,6 +17,7 @@ class Enemy:
         self.level = level
         self.health = DEFAULT_HEALTH + (level - 1) * 20  
         self.type = type
+        self.world = world
         
     def move_forward(self, speed):
         radians = math.radians(self.angle)
@@ -51,11 +52,11 @@ class Enemy:
         
         match self.type:
             case "hunter":
-                return hunter(self, player, cooldown)
+                return hunter(self, player, cooldown, self.world.objects, self.world.enemies)
             case "sniper":
-                return sniper(self, player, cooldown)
+                return sniper(self, player, cooldown, self.world.objects, self.world.enemies)
             case "guard":
-                return guard(self, player, cooldown)
+                return guard(self, player, cooldown, self.world.objects, self.world.enemies)
             case _:
                 return simple_enemy(self, player, cooldown)
         

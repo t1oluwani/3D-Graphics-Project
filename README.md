@@ -37,14 +37,15 @@
 - [x] Implement win/lose conditions  
 - [x] Smoothen player and bullet movements
 - [x] Add game state system (menu, playing, game over) 
-- [x] Raytracing hinder ed by obstacles (leaving for easy testing)
+- [x] Raytracing hindered by obstacles (leaving for easy testing)
 
 #### MVP 4: Enemy AI & Finishing Touches 
 - [x] Border handling and hit signs
-- [ ] Make enemy behavior autonomous (AI patrol or attack)
+- [x] Make enemy behavior autonomous (AI patrol or attack)
   - [x] snipers/hiders (hides and keeps distance then snipes from afar) (majority in hard mode, minority in easy)
   - [x] aggresive/hunters (hunt you from the jump and chases you relentlessly) (majority in medium mode)
   - [x] patrollers/guards (circles a certain area till you're in range then attacks) (majority in easy mode, minority in hard)
+- [ ] Enemies should avoid obstacles and other enemies (replace move foward with pathfinding) + raytracing for enemy shooting
 - [ ] Finishing touches + UPD readme with pictures (mountains maybe)
 
 ---
