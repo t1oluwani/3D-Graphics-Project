@@ -52,11 +52,11 @@ class Enemy:
         
         match self.type:
             case "hunter":
-                return hunter(self, player, cooldown, self.world.objects, self.world.enemies)
+                return hunter(self, player, cooldown)
             case "sniper":
-                return sniper(self, player, cooldown, self.world.objects, self.world.enemies)
+                return sniper(self, player, cooldown)
             case "guard":
-                return guard(self, player, cooldown, self.world.objects, self.world.enemies)
+                return guard(self, player, cooldown)
             case _:
                 return simple_enemy(self, player, cooldown)
         
