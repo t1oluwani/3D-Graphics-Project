@@ -20,18 +20,24 @@ def begin_draw_2d(width=500, height=500):
 
     # Disable depth
     glDisable(GL_DEPTH_TEST)
+    
+    # Enable blending 
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
 
 def end_draw_2d():
+    # Disable blending
+    glDisable(GL_BLEND)
+    
     # Restore depth
     glEnable(GL_DEPTH_TEST)
 
     # Restore 3D mode
-    glPopMatrix()
     glMatrixMode(GL_PROJECTION)
     glPopMatrix()
     glMatrixMode(GL_MODELVIEW)
-
+    glPopMatrix()
 
 def load_obj(path):
     vertices = []

@@ -1,56 +1,115 @@
-## 🎮 3D Graphics Project (OpenGL)
+# 3D Graphics Project
 
-**Goal:** Rebuild Atari Battlezone or create a similar project
-
-**Tech Stack:** Python, OpenGL
-
-**Features:**
-
-* First-person view with retro-style wireframe graphics
-* Tank movement & shooting mechanics
-* Procedural terrain generation
-* Multiple enemies with simple AI (chase/fire)
-* HUD with lives, and score
-* Game loop with win/lose conditions
+> A faithful recreation of the 1980 Atari arcade classic, rebuilt in Python with OpenGL and computer graphics techniques. 
 
 ---
 
-### ✅ Workflow & Milestones Checklist
+## Screenshots
 
-#### MVP 1: Basic Framework & Movement
-- [x] Set up Python and OpenGL development environment
-- [x] Create window and rendering context
-- [x] Implement first-person camera controls (look & move)
-- [x] Render simple wireframe objects (e.g., tank model placeholder)
-- [x] Basic tank movement mechanics (forward, backward, turn)
+![alt text](assets/image.png)
+![alt text](assets/image-1.png)
+![alt text](assets/image-2.png)
+![alt text](assets/image-3.png)
+![alt text](assets/image-4.png)
 
-#### MVP 2: Shooting & Enemy Basics
-- [x] Implement shooting mechanics (projectiles firing)
-- [x] Create simple enemy models (wireframe)
-- [x] Implement maual basic enemy movement (similar to player)
-- [x] Generate multiple enemies at random locations
-- [x] Scope detects when enemy in line and changes
-- [x] Collision detection for projectiles and enemies
-
-#### MVP 3: Game, Effects & Gameplay
-- [x] Add HUD elements (score display, lives counter, etc.)  
-- [x] Implement win/lose conditions  
-- [x] Smoothen player and bullet movements
-- [x] Add game state system (menu, playing, game over) 
-- [x] Raytracing hinder ed by obstacles (leaving for easy testing)
-
-#### MVP 4: Enemy AI & Finishing Touches
-- [ ] Make enemy behavior autonomous (AI patrol or attack)
-  - [ ] snipers/hiders (hides and keeps distance then snipes from afar) (majority in hard mode, minority in easy)
-  - [ ] aggresive/hunters (hunt you from the jump and chases you relentlessly) (majority in medium mode)
-  - [ ] patrollers/guards (circles a certain area till you're in range then attacks) (majority in easy mode, minority in hard)
-- [ ] Finishing touches + UPD readme with pictures (mountains maybe)
 
 ---
 
-### 📚 References
+## Overview
 
-**OpenGL & Game Dev Tutorials**
+This project recreates *Atari Battlezone*, the pioneering 1980 first-person tank shooter, using Python and OpenGL. It features retro wireframe 3D graphics, enemy tanks with autonomous AI, procedurally generated terrain, and arcade-style gameplay, exploring real-time 3D graphics. The game starts with a difficulty menu, then places you in a first-person battlefield where you navigate, aim, shoot, and survive waves of enemies across multiple levels, using pygame for the window/event loop and PyOpenGL for rendering.
 
-* [Computer Graphics Basics and OpenGL](https://apps.ualberta.ca/catalogue/course/cmput/411)
-* [Tank STL and OBJ Model](https://www.thingiverse.com/thing:3695414)
+---
+
+## Technical Highlights & Features
+
+- **First-person wireframe rendering** — retro vector-style 3D visuals inspired by the original  
+- **Tank controls** — smooth forward, backward, and turning movement  
+- **Shooting mechanics** — projectile firing with raycasting-based hit detection, blocked by obstacles  
+- **Raycasting** — line-of-sight detection for enemy attacks with proper obstruction handling  
+- **Enemy AI** — three distinct types using state machines  
+  - Guard: patrol → attack → return  
+  - Hunter: approach → charge  
+  - Sniper: advance → hold → retreat  
+- **Pathfinding** — positional correction-based avoidance prevents overlap while blending with target-seeking  
+- **Procedural world generation** — randomized obstacles and enemies scaled by level and difficulty  
+- **Difficulty system** — Easy, Normal, and Hard with scaling enemy count and damage  
+- **HUD & game states** — score, lives, scope indicator, plus menu, gameplay, and game-over screens
+  
+---
+
+## Project Structure
+
+- `main.py` starts the game
+- `engine/` contains window setup, configuration, and launch logic
+- `objects/` contains the player, enemy, bullet, world, and game state classes
+- `render/` contains OpenGL drawing code for the world, HUD, menu, and overlays
+- `math3d/` contains raycasting, collision, and pathfinding helpers
+- `game_ai/` contains enemy behavior logic
+- `models/` stores the tank model assets used by the renderer
+  
+---
+
+## Enemy Types
+
+| Type | Behavior | Dominant In |
+|------|----------|-------------|
+| **Guard** | Patrols a fixed area, attacks when player enters range | Easy |
+| **Hunter** | Aggressively chases and closes to point-blank range | Normal |
+| **Sniper** | Keeps distance, retreats when approached, fires from afar | Hard |
+
+Enemy spawn ratios shift by difficulty:
+
+| Difficulty | Guard | Hunter | Sniper |
+|------------|-------|--------|--------|
+| Easy | 60% | 30% | 10% |
+| Normal | 30% | 40% | 30% |
+| Hard | 10% | 40% | 50% |
+
+---
+
+## 🚀 Getting Started
+
+### Requirements
+
+- Python 3.10+
+- PyOpenGL
+- pygame or GLFW (for windowing)
+
+### Install
+
+```bash
+pip install PyOpenGL PyOpenGL_accelerate pygame
+```
+
+### Run
+
+```bash
+python main.py
+```
+
+---
+
+## Controls
+
+| Key | Action |
+|-----|--------|
+| `W` | Move forward |
+| `S` | Move backward |
+| `A` | Rotate left |
+| `D` | Rotate right |
+| `Q` | Aim left |
+| `E` | Aim right |
+| `Space` | Shoot |
+| `Esc` | Quit |
+
+---
+
+## References
+
+- [Atari Battlezone (1980)](https://en.wikipedia.org/wiki/Battlezone_(1980_video_game))
+- [Computer Graphics — CMPUT 411, University of Alberta](https://apps.ualberta.ca/catalogue/course/cmput/411)
+- [Tank STL/OBJ Model — Thingiverse](https://www.thingiverse.com/thing:3695414)
+- [OpenGL Documentation](https://www.opengl.org/documentation/)
+
+*Inspired by the original Atari Battlezone © 1980 Atari Inc.*

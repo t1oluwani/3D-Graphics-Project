@@ -3,13 +3,11 @@ from objects.bullet import Bullet
 
 MOVEMENT_SPEED = 0.15
 ROTATION_AMOUNT = 1.0
-
 class Player:
     def __init__(self):
         self.x = 0
-        self.y = 0
         self.z = 0
-        self.angle = 0  # degrees
+        self.angle = 0  # remember degrees
 
     def move_forward(self, speed=MOVEMENT_SPEED):
         radians = math.radians(self.angle)
@@ -30,4 +28,4 @@ class Player:
         self.angle %= 360
 
     def shoot(self):
-        return Bullet(self)
+        return Bullet(self, "player")

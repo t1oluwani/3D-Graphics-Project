@@ -1,8 +1,10 @@
+import math
 import random
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
 from objects.enemy import spawn_enemy_at
+from engine.configs import EOW_BOUNDARY
 class World:
     def __init__(self, player, level, size=2000):
         self.size = size
@@ -11,18 +13,37 @@ class World:
         self.level = level
         self.difficulty = 0
         self.max_level = 0
+        self.player = player
         self.ref_angle = player.angle
         
     def get_random_pos(self, enemy=False):
-        player_safe_zone = 5 if enemy else 1 # differing safe zones for enemies vs objects 
+        player_safe_zone = 3 if enemy else 0.5 # differing safe zones for enemies vs objects 
             
         while True:
-            x = random.randint(-50, 50) 
-            z = random.randint(-50, 50)
+            r = EOW_BOUNDARY * (random.random() ** 0.5)
+            theta = random.uniform(0, 2 * math.pi)
+
+            x = r * math.cos(theta)
+            z = r * math.sin(theta)
             a = random.randint(0, 360)
-            if abs(x) > player_safe_zone or abs(z) > player_safe_zone:
+
+            if (x**2 + z**2) > player_safe_zone**2:
                 return (x, z, a)
             
+    def enemy_ratio_split(self, total_enemies, difficulty):
+        ratios = { # guard, hunter, and sniper respectively
+            0: (0.60, 0.30, 0.10),  # easy
+            1: (0.30, 0.40, 0.30),  # normal
+            2: (0.10, 0.40, 0.50),  # hard
+        }
+
+        guard_r, hunter_r, sniper_r = ratios.get(difficulty, (0.60, 0.30, 0.10))
+
+        num_guards  = round(total_enemies * guard_r)
+        num_hunters = round(total_enemies * hunter_r)
+        num_snipers = total_enemies - num_guards - num_hunters
+
+        return num_guards, num_hunters, num_snipers
             
     def generate_world(self, difficulty):
         level_factor = (self.level-1)*2
@@ -32,13 +53,17 @@ class World:
             self.objects.append({'type': 'pyramid', 'pos': self.get_random_pos()})
         for _ in range(difficulty_factor*3 + level_factor*2):
             self.objects.append({'type': 'block', 'pos': self.get_random_pos()})
-        for _ in range(difficulty_factor + level_factor):
-            self.enemies.append(spawn_enemy_at(*self.get_random_pos()))
-            
-        # Debug lines (TODO: DELETE)
-        print(f"Generating world for level {self.level} with difficulty '{difficulty}'...")
-        print(f"Generated {len(self.objects)} objects and {len(self.enemies)} enemies.")
-            
+        
+        total_enemies = difficulty_factor + level_factor
+        num_guards, num_hunters, num_snipers = self.enemy_ratio_split(total_enemies, difficulty)
+
+        for _ in range(num_guards):
+            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "guard", self))
+        for _ in range(num_hunters):
+            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "hunter", self))
+        for _ in range(num_snipers):
+            self.enemies.append(spawn_enemy_at(*self.get_random_pos(), self.level, "sniper", self))
+                
         self.init_enemy_count = len(self.enemies)
             
     def clear_world(self):

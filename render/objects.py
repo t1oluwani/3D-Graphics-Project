@@ -52,7 +52,7 @@ def draw_bullet(bullet):
     radius = 0.125
 
     glPushMatrix()
-    glTranslatef(bullet.x, bullet.y, bullet.z)
+    glTranslatef(bullet.x, 0, bullet.z)
     glColor3f(0.0, 1.0, 0.0)
 
     quad = gluNewQuadric()
