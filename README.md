@@ -17,18 +17,19 @@ This project recreates *Atari Battlezone*, the pioneering 1980 first-person tank
 
 ## Technical Highlights & Features
 
-- **First-person wireframe rendering** — retro vector-style 3D visuals inspired by the original  
-- **Tank controls** — smooth forward, backward, and turning movement  
-- **Shooting mechanics** — projectile firing with raycasting-based hit detection, blocked by obstacles  
-- **Raycasting** — line-of-sight detection for enemy attacks with proper obstruction handling  
-- **Enemy AI** — three distinct types using state machines  
+- **First-person wireframe rendering** - retro vector-style 3D visuals inspired by the original  
+- **Tank controls** - smooth forward, backward, and turning movement  
+- **Shooting mechanics** - projectile firing with raycasting-based hit detection, blocked by obstacles  
+- **Raycasting** - line-of-sight detection for enemy attacks with proper obstruction handling  
+- **Enemy AI** - three distinct types using state machines  
   - Guard: patrol → attack → return  
   - Hunter: approach → charge  
   - Sniper: advance → hold → retreat  
-- **Pathfinding** — positional correction-based avoidance prevents overlap while blending with target-seeking  
-- **Procedural world generation** — randomized obstacles and enemies scaled by level and difficulty  
-- **Difficulty system** — Easy, Normal, and Hard with scaling enemy count and damage  
-- **HUD & game states** — score, lives, scope indicator, plus menu, gameplay, and game-over screens
+- **Pathfinding** - positional correction-based avoidance prevents overlap while blending with target-seeking  
+- **Procedural world generation** - randomized obstacles and enemies scaled by level and difficulty  
+- **Difficulty system** - Easy, Normal, and Hard with scaling enemy count and damage
+- **Damage feedback** - red border flash on screen edges when the player takes a hit
+- **HUD & game states** - score, lives, scope indicator, plus menu, gameplay, and game-over screens
   
 ## Project Structure
 
@@ -92,8 +93,8 @@ python main.py
 ## References
 
 - [Atari Battlezone (1980)](https://en.wikipedia.org/wiki/Battlezone_(1980_video_game))
-- [Computer Graphics — CMPUT 411, University of Alberta](https://apps.ualberta.ca/catalogue/course/cmput/411)
-- [Tank STL/OBJ Model — Thingiverse](https://www.thingiverse.com/thing:3695414)
+- [Computer Graphics - CMPUT 411, University of Alberta](https://apps.ualberta.ca/catalogue/course/cmput/411)
+- [Tank STL/OBJ Model - Thingiverse](https://www.thingiverse.com/thing:3695414)
 - [OpenGL Documentation](https://www.opengl.org/documentation/)
 
 *Inspired by the original Atari Battlezone © 1980 Atari Inc.*
