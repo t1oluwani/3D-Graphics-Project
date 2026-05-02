@@ -16,7 +16,7 @@ def get_distance(enemy, player):
 
 
 def shot_attempt(enemy, distance, range, cooldown):
-    if raycast(enemy, enemy.world.player, enemy.world.objects)  and distance < range:
+    if not raycast(enemy, enemy.world.player, enemy.world.objects)  and distance < range:
         now = time.time()
         if not hasattr(enemy, "last_shot") or now - enemy.last_shot > cooldown:
             enemy.last_shot = now
