@@ -1,8 +1,10 @@
 # 3D Graphics Project
 
-> A faithful recreation of the 1980 Atari arcade classic, rebuilt in Python with OpenGL and computer graphics techniques. 
+A faithful recreation of the 1980 Atari arcade classic, rebuilt in Python with OpenGL and computer graphics techniques. 
 
----
+## Overview
+
+This project recreates *Atari Battlezone*, the pioneering 1980 first-person tank shooter, using Python and OpenGL. It features retro wireframe 3D graphics, enemy tanks with autonomous AI, procedurally generated terrain, and arcade-style gameplay, exploring real-time 3D graphics. The game starts with a difficulty menu, then places you in a first-person battlefield where you navigate, aim, shoot, and survive waves of enemies across multiple levels, using pygame for the window/event loop and PyOpenGL for rendering.
 
 ## Screenshots
 
@@ -12,15 +14,6 @@
 ![alt text](assets/image-3.png)
 ![alt text](assets/image-4.png)
 ![alt text](assets/image-5.png)
-
-
----
-
-## Overview
-
-This project recreates *Atari Battlezone*, the pioneering 1980 first-person tank shooter, using Python and OpenGL. It features retro wireframe 3D graphics, enemy tanks with autonomous AI, procedurally generated terrain, and arcade-style gameplay, exploring real-time 3D graphics. The game starts with a difficulty menu, then places you in a first-person battlefield where you navigate, aim, shoot, and survive waves of enemies across multiple levels, using pygame for the window/event loop and PyOpenGL for rendering.
-
----
 
 ## Technical Highlights & Features
 
@@ -37,8 +30,6 @@ This project recreates *Atari Battlezone*, the pioneering 1980 first-person tank
 - **Difficulty system** — Easy, Normal, and Hard with scaling enemy count and damage  
 - **HUD & game states** — score, lives, scope indicator, plus menu, gameplay, and game-over screens
   
----
-
 ## Project Structure
 
 - `main.py` starts the game
@@ -48,8 +39,6 @@ This project recreates *Atari Battlezone*, the pioneering 1980 first-person tank
 - `math3d/` contains raycasting, collision, and pathfinding helpers
 - `game_ai/` contains enemy behavior logic
 - `models/` stores the tank model assets used by the renderer
-  
----
 
 ## Enemy Types
 
@@ -66,8 +55,6 @@ Enemy spawn ratios shift by difficulty:
 | Easy | 60% | 30% | 10% |
 | Normal | 30% | 40% | 30% |
 | Hard | 10% | 40% | 50% |
-
----
 
 ## 🚀 Getting Started
 
@@ -89,8 +76,6 @@ pip install PyOpenGL PyOpenGL_accelerate pygame
 python main.py
 ```
 
----
-
 ## Controls
 
 | Key | Action |
@@ -103,8 +88,6 @@ python main.py
 | `E` | Aim right |
 | `Space` | Shoot |
 | `Esc` | Quit |
-
----
 
 ## References
 
