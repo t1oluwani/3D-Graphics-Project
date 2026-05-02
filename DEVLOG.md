@@ -46,7 +46,7 @@
   - [x] aggresive/hunters (hunt you from the jump and chases you relentlessly) (majority in medium mode)
   - [x] patrollers/guards (circles a certain area till you're in range then attacks) (majority in easy mode, minority in hard)
 - [x] Enemies should avoid obstacles and other enemies (replace move foward with pathfinding) + raytracing for enemy shooting
-- [ ] Finishing touches + UPD readme with pictures
+- [x] Finishing touches + UPD readme with pictures
 
 ---
 
